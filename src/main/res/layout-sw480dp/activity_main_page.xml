@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainContent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_back_b"
+    android:baselineAligned="false"
+    android:layoutDirection="rtl"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/LogoRect"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".15"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="toWelcome"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/logo_icon"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/haamiRect2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".14"
+        android:layout_below="@id/haamiRect1"
+        android:layout_gravity="center|fill_horizontal"
+        android:background="@drawable/main_first">
+
+        <TextView
+            android:id="@+id/haamiText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="toAbout"
+            android:text="درباره حامی"
+            android:textColor="#fdc425"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_weight=".5"
+            android:layout_gravity="center|center_vertical"
+            android:gravity="center_horizontal"/>
+        <TextView
+            android:id="@+id/haamiText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="toIntroduction"
+            android:text="راهنما"
+            android:textColor="#fdc425"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_weight=".5"
+            android:layout_gravity="center|center_vertical"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/jftRect"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/haamiRect1"
+        android:layout_weight=".14"
+        android:background="@drawable/main_first">
+
+        <ImageView
+            android:id="@+id/jftIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="justForToday"
+            app:srcCompat="@drawable/just_for_today_icon" />
+
+        <TextView
+            android:id="@+id/justfortodayText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/jftIcon"
+            android:onClick="justForToday"
+            android:text="@string/just_for_today"
+            android:textColor="#fdc425"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_gravity="center|center_vertical"
+            android:gravity="center_horizontal"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bbRect"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".14"
+        android:background="@drawable/main_first">
+
+        <ImageView
+            android:id="@+id/bbIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="toBasicBook"
+            app:srcCompat="@drawable/basic_book_icon" />
+
+        <TextView
+            android:id="@+id/basicbookText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/bbIcon"
+            android:onClick="toBasicBook"
+            android:text="@string/basic_book"
+            android:textColor="#fdc425"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            android:layout_gravity="center|center_vertical"
+            android:gravity="center_horizontal"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ucRect"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".14"
+        android:background="@drawable/main_first">
+
+        <ImageView
+            android:id="@+id/ucIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="toUsefulContents"
+            app:srcCompat="@drawable/useful_contents_icon" />
+
+        <TextView
+            android:id="@+id/usefulcontentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/ucIcon"
+            android:onClick="toUsefulContents"
+            android:text="@string/useful_contents"
+            android:textColor="#fdc425"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            android:layout_gravity="center|center_vertical"
+            android:gravity="center_horizontal"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/upRect"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".14"
+        android:background="@drawable/main_first">
+
+        <ImageView
+            android:id="@+id/upIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="toUsefulPlacesAndLinks"
+            app:srcCompat="@drawable/useful_places_icon" />
+
+        <TextView
+            android:id="@+id/usefulplacesText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/upIcon"
+            android:onClick="toUsefulPlacesAndLinks"
+            android:text="@string/useful_places_and_links"
+            android:textColor="#fdc425"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            android:layout_gravity="center|center_vertical"
+            android:gravity="center_horizontal"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/useRect"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".15"
+        android:background="@drawable/fifth_block">
+
+        <ImageView
+            android:id="@+id/useIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="toUse"
+            app:srcCompat="@drawable/use_icon" />
+
+        <TextView
+            android:id="@+id/useText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/useIcon"
+            android:onClick="toUse"
+            android:text="@string/use"
+            android:textColor="#fdc425"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            android:layout_gravity="center|center_vertical"
+            android:gravity="center_horizontal"/>
+    </RelativeLayout>
+</LinearLayout>

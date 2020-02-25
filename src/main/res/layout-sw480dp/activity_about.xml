@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/contents_back"
+    android:layoutDirection="rtl"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/contents_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="درباره حامی"
+            android:textColor="#012a27"
+            android:textSize="25sp"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/aboutText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:lineSpacingExtra="10dp"
+                android:padding="15dp"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/icons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/bottom_tab"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="15dp"
+            android:onClick="justForToday"
+            app:srcCompat="@drawable/just_for_today_icon"
+            android:layout_weight=".16"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="15dp"
+            app:srcCompat="@drawable/basic_book_icon"
+            android:layout_weight=".16"
+            android:onClick="toBasicBook"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="15dp"
+            android:onClick="toUsefulPlacesAndLinks"
+            app:srcCompat="@drawable/useful_places_icon"
+            android:layout_weight=".16"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="15dp"
+            android:onClick="toUsefulContents"
+            app:srcCompat="@drawable/useful_contents_icon"
+            android:layout_weight=".16"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="15dp"
+            android:onClick="toUse"
+            app:srcCompat="@drawable/use_icon"
+            android:layout_weight=".16"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="15dp"
+            android:onClick="start"
+            app:srcCompat="@drawable/home_icon"
+            android:layout_weight=".2"/>
+    </LinearLayout>
+</LinearLayout>

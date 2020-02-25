@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.haami.haami"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <uses-sdk
+        android:maxSdkVersion="25"
+        android:minSdkVersion="19"
+        android:targetSdkVersion="25" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-configuration android:reqTouchScreen="finger" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:xlargeScreens="false" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Welcome"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainPage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BasicBook"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".JustForToday"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UsefulContents"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UsefulPlaces"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Use"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Contents"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Families"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LikeMe"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Narcos"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RecoveryAndUs"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Places"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UsefulLinks"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UsefulPlacesAndLinks"
+            android:screenOrientation="portrait" />
+        <activity android:name=".About" />
+        <activity android:name=".Introduction" />
+        <activity android:name=".BasicBookChapter"></activity>
+    </application>
+
+</manifest>
