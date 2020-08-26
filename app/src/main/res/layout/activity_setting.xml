@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.haami.haami.SettingActivity"
+    android:background="@color/colorBackground">
+
+    <ImageButton
+        android:id="@+id/return_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        android:padding="10dp"
+        android:src="@drawable/return_icon"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/iran_sans_bold"
+        android:text="@string/settings"
+        android:textSize="22sp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/return_button">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <Button
+                android:id="@+id/my_account_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/setting_button_background"
+                android:drawableRight="@drawable/my_account_icon"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/iran_sans"
+                android:gravity="right|center"
+                android:padding="20dp"
+                android:text="@string/my_account"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/clock_adjustment_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/setting_button_background"
+                android:drawableRight="@drawable/adjust_clock_icon"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/iran_sans"
+                android:gravity="right|center"
+                android:padding="20dp"
+                android:text="@string/adjust_clock"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/my_account_button" />
+
+            <Button
+                android:id="@+id/your_comments_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/setting_button_background"
+                android:drawableRight="@drawable/your_comments_icon"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/iran_sans"
+                android:gravity="right|center"
+                android:padding="20dp"
+                android:text="@string/your_comments"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/clock_adjustment_button" />
+
+            <Button
+                android:id="@+id/privacy_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/setting_button_background"
+                android:drawableRight="@drawable/privacy_icon"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/iran_sans"
+                android:gravity="right|center"
+                android:padding="20dp"
+                android:text="@string/privacy"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/your_comments_button" />
+
+            <Button
+                android:id="@+id/about_haami_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/setting_button_background"
+                android:drawableRight="@drawable/about_icon"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/iran_sans"
+                android:gravity="right|center"
+                android:padding="20dp"
+                android:text="@string/about_haami"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/privacy_button" />
+
+            <Button
+                android:id="@+id/update_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/setting_button_background"
+                android:drawableRight="@drawable/update_version_icon"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/iran_sans"
+                android:gravity="right|center"
+                android:padding="20dp"
+                android:text="@string/update"
+                android:textAlignment="gravity"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/about_haami_button" />
+
+            <Button
+                android:id="@+id/exit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/not_feeling_good_background"
+                android:fontFamily="@font/iran_sans"
+                android:text="@string/exit"
+                android:textColor="@color/colorRelaxationActiveTitle"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/update_button"
+                tools:layout_editor_absoluteX="20dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

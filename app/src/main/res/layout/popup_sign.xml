@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <ImageButton
+        android:id="@+id/close_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/colorRelaxationActiveTitle"
+        android:src="@drawable/close_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/iran_sans_bold"
+        android:text="@string/signs"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/current_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:src="@drawable/rahro_sign_big"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_textview" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/iran_sans_bold"
+        android:text="@string/rahro"
+        android:textColor="@color/colorGreen"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toStartOf="@+id/current_sign"
+        app:layout_constraintTop_toTopOf="@+id/current_sign" />
+
+    <TextView
+        android:id="@+id/description_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/iran_sans"
+        android:text="توضیح نشان رهرو"
+        android:textColor="@color/colorLibraryActiveTitle"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/library_deactive_tab_background"
+        app:layout_constraintTop_toBottomOf="@+id/current_sign"
+        tools:layout_editor_absoluteX="30dp" />
+
+    <ImageView
+        android:id="@+id/rahro_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/rahro_sign"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/rahnavard_sign"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/rahro_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/iran_sans_bold"
+        android:text="@string/rahro"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/rahro_sign"
+        app:layout_constraintStart_toStartOf="@+id/rahro_sign"
+        app:layout_constraintTop_toBottomOf="@+id/rahro_sign" />
+
+    <ImageView
+        android:id="@+id/rahnavard_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/rahnavard_sign"
+        app:layout_constraintEnd_toStartOf="@+id/rahro_sign"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rahro_sign" />
+
+    <TextView
+        android:id="@+id/rahnavard_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/iran_sans_bold"
+        android:text="@string/rahnavard"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/rahnavard_sign"
+        app:layout_constraintStart_toStartOf="@+id/rahnavard_sign"
+        app:layout_constraintTop_toBottomOf="@+id/rahnavard_sign" />
+
+    <ImageView
+        android:id="@+id/pishtaz_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pishtaz_sign"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/rahro_sign"
+        app:layout_constraintTop_toBottomOf="@+id/rahro_text" />
+
+    <TextView
+        android:id="@+id/pishtaz_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/iran_sans_bold"
+        android:text="@string/pishtaz"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/pishtaz_sign"
+        app:layout_constraintStart_toStartOf="@+id/pishtaz_sign"
+        app:layout_constraintTop_toBottomOf="@+id/pishtaz_sign" />
+
+    <ImageView
+        android:id="@+id/pirouz_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pirouz_sign"
+        app:layout_constraintEnd_toEndOf="@+id/rahnavard_sign"
+        app:layout_constraintTop_toTopOf="@+id/pishtaz_sign" />
+
+    <TextView
+        android:id="@+id/pirouz_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/iran_sans_bold"
+        android:text="@string/pirouz"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/pirouz_sign"
+        app:layout_constraintStart_toStartOf="@+id/pirouz_sign"
+        app:layout_constraintTop_toBottomOf="@+id/pirouz_sign" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

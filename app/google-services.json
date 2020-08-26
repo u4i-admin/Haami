@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "384942651677",
+    "firebase_url": "https://haami-4e677.firebaseio.com",
+    "project_id": "haami-4e677",
+    "storage_bucket": "haami-4e677.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384942651677:android:07e7a01c3473a5c3",
+        "android_client_info": {
+          "package_name": "com.haami.haami"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "384942651677-00o8fff1ics5u2a3lvuieq4201r8u47e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haami.haami",
+            "certificate_hash": "84c11066673b8027ddfee58bcd2d9d32d2108153"
+          }
+        },
+        {
+          "client_id": "384942651677-v106lb11a9a16thpbilcbbn1oevb1103.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haami.haami",
+            "certificate_hash": "c87db5acf059f9f5fac324e05465ab04cd43f3b6"
+          }
+        },
+        {
+          "client_id": "384942651677-frqa3cqetvqrklu2mlh5pp4ch13f27eb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7q0BqmJA1DqsYFwxlpakBxpyf5yeeJDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "384942651677-frqa3cqetvqrklu2mlh5pp4ch13f27eb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

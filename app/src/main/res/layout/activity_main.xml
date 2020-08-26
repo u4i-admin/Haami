@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.haami.haami.MainActivity"
+    android:background="@color/colorBackground">
+
+    <FrameLayout
+        android:id="@+id/frame_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@drawable/bottom_bar_background"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/home_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/bottom_bar_button_background"
+            android:drawableTop="@drawable/home_icon_active"
+            android:fontFamily="@font/iran_sans"
+            android:text="@string/home"
+            android:textColor="@color/colorActiveText"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/library_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/bottom_bar_button_background"
+            android:drawableTop="@drawable/library_icon_deactive"
+            android:fontFamily="@font/iran_sans"
+            android:text="@string/library"
+            android:textColor="@color/colorNotActiveText"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/relaxation_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/bottom_bar_button_background"
+            android:drawableTop="@drawable/relaxation_icon_deactive"
+            android:fontFamily="@font/iran_sans"
+            android:text="@string/relaxation"
+            android:textColor="@color/colorNotActiveText"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/places_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/bottom_bar_last_button_background"
+            android:drawableTop="@drawable/places_icon_deactive"
+            android:fontFamily="@font/iran_sans"
+            android:text="@string/places_to_go"
+            android:textColor="@color/colorNotActiveText"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/back_dim_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C0000000"
+        android:visibility="gone" >
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context="com.haami.haami.HomeFragment">
+
+    <ImageButton
+        android:id="@+id/setting_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:background="@color/colorBackground"
+        android:padding="5dp"
+        android:src="@drawable/setting_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/image_icon" />
+
+    <ImageView
+        android:id="@+id/image_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/colorBackground"
+        android:padding="5dp"
+        android:src="@drawable/home_center_icon"
+        app:layout_constraintBottom_toTopOf="@+id/just_for_today_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/just_for_today_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bottom_bar_last_button_background"
+        android:drawableTop="@drawable/calendar_icon"
+        android:fontFamily="@font/iran_sans"
+        android:text="فقط برای امروز"
+        android:textColor="@color/colorActiveText"
+        app:layout_constraintBottom_toTopOf="@+id/gauge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_icon" />
+
+    <pl.pawelkleczkowski.customgauge.CustomGauge
+        android:id="@+id/gauge"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        app:gaugeEndValue="100"
+        app:gaugePointEndColor="@color/colorGauge"
+        app:gaugePointSize="52"
+        app:gaugePointStartColor="@color/colorGauge"
+        app:gaugeStartAngle="135"
+        app:gaugeStartValue="0"
+        app:gaugeStrokeCap="ROUND"
+        app:gaugeStrokeColor="@color/colorBorder"
+        app:gaugeStrokeWidth="30dp"
+        app:gaugeSweepAngle="270"
+        app:layout_constraintBottom_toTopOf="@+id/not_feeling_good_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/just_for_today_button" />
+
+    <ImageButton
+        android:id="@+id/sign_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:background="@color/colorBackground"
+        android:src="@drawable/rahro_icon"
+        app:layout_constraintEnd_toEndOf="@+id/gauge"
+        app:layout_constraintStart_toStartOf="@+id/gauge"
+        app:layout_constraintTop_toTopOf="@+id/gauge" />
+
+    <ImageView
+        android:id="@+id/sign_not_choose_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:background="@color/colorBackground"
+        android:src="@drawable/sign_not_choose_icon"
+        app:layout_constraintEnd_toEndOf="@+id/gauge"
+        app:layout_constraintStart_toStartOf="@+id/gauge"
+        app:layout_constraintTop_toTopOf="@+id/gauge"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/set_clock_button"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/set_clock_button_background"
+        android:fontFamily="@font/iran_sans"
+        android:padding="5dp"
+        android:textSize="18sp"
+        android:layout_marginTop="30dp"
+        android:text="@string/set_clock"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/gauge"
+        app:layout_constraintStart_toStartOf="@+id/gauge"
+        app:layout_constraintTop_toBottomOf="@+id/sign_not_choose_image"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/days_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/iran_sans_fa_num_bold"
+        android:text="۵۵"
+        android:textColor="@color/colorBackgroundMindFulness"
+        android:textSize="60sp"
+        app:layout_constraintEnd_toEndOf="@+id/gauge"
+        app:layout_constraintStart_toStartOf="@+id/gauge"
+        app:layout_constraintTop_toBottomOf="@+id/sign_button" />
+
+    <TextView
+        android:id="@+id/day_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/iran_sans"
+        android:text="@string/day"
+        android:textColor="@color/colorBackgroundMindFulness"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/gauge"
+        app:layout_constraintEnd_toEndOf="@+id/gauge"
+        app:layout_constraintStart_toStartOf="@+id/gauge" />
+
+    <Button
+        android:id="@+id/not_feeling_good_button"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:background="@drawable/not_feeling_good_background"
+        android:drawableRight="@drawable/sad_icon"
+        android:drawablePadding="3dp"
+        android:fontFamily="@font/iran_sans_bold"
+        android:padding="5dp"
+        android:text="@string/not_feeling_good"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gauge" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

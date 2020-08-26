@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.haami.haami.NotFeelingGoodFragment"
+    android:background="@color/colorBackgroundBadFeeling">
+
+    <ImageButton
+        android:id="@+id/close_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackgroundBadFeeling"
+        android:padding="10dp"
+        android:src="@drawable/close_icon_white"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/iran_sans_bold"
+        android:text="@string/not_feeling_good"
+        android:textSize="22sp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/colorRelaxationActiveTitle"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/read_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/not_feeling_good_button_background"
+        android:drawableRight="@drawable/read_icon"
+        android:drawablePadding="15dp"
+        android:fontFamily="@font/iran_sans"
+        android:gravity="right|center"
+        android:padding="25dp"
+        android:text="@string/read"
+        android:textAlignment="gravity"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/title_textview" />
+
+    <Button
+        android:id="@+id/play_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/not_feeling_good_button_background"
+        android:drawableRight="@drawable/play_game_icon"
+        android:drawablePadding="15dp"
+        android:fontFamily="@font/iran_sans"
+        android:gravity="right|center"
+        android:padding="25dp"
+        android:text="@string/play"
+        android:textAlignment="gravity"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/read_button" />
+
+    <Button
+        android:id="@+id/talk_to_constultant_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/not_feeling_good_button_background"
+        android:drawableRight="@drawable/talk_to_consultant_icon"
+        android:drawablePadding="15dp"
+        android:fontFamily="@font/iran_sans"
+        android:gravity="right|center"
+        android:padding="25dp"
+        android:text="@string/talk_to_consultant"
+        android:textAlignment="gravity"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/play_button" />
+
+    <Button
+        android:id="@+id/tell_your_story_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/not_feeling_good_button_background"
+        android:drawableRight="@drawable/tell_your_story_icon"
+        android:drawablePadding="15dp"
+        android:fontFamily="@font/iran_sans"
+        android:gravity="right|center"
+        android:padding="25dp"
+        android:text="@string/tell_your_story"
+        android:textAlignment="gravity"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/talk_to_constultant_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

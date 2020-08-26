@@ -1,0 +1,2 @@
+rootProject.name='Haami'
+include ':app'
