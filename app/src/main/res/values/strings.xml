@@ -61,4 +61,5 @@
     <string name="set_clock">تنظیم ساعت</string>
     <string name="you_must_create_account">برای ارسال مطلب خود نیاز \n دارید حساب کاربری بسازید</string>
     <string name="your_story_sent">داستان شما ارسال شد</string>
+    <string name="sample_text">حاوی نکاتی پیرامون اعتیاد</string>
 </resources>

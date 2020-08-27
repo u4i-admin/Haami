@@ -6,6 +6,8 @@ public class BookSectionResponse {
     private String sectionName;
     private String title;
     private String body;
+    private String imageUrl;
+    private String audioUrl;
 
     private BookResponse book;
 
@@ -55,5 +57,21 @@ public class BookSectionResponse {
 
     public void setBook(BookResponse book) {
         this.book = book;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getAudioUrl() {
+        return audioUrl;
+    }
+
+    public void setAudioUrl(String audioUrl) {
+        this.audioUrl = audioUrl;
     }
 }

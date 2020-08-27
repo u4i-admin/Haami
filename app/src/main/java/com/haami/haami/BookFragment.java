@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.haami.haami.adapters.BookAdapter;
 import com.haami.haami.app.AppController;
 import com.haami.haami.models.apiResponse.BookApiResponse;
+import com.haami.haami.models.responses.ArticleResponse;
 import com.haami.haami.models.responses.BookResponse;
 import com.haami.haami.utils.RecyclerTouchListener;
 
@@ -72,13 +73,18 @@ public class BookFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 BookResponse book = bookList.get(position);
-                Toast.makeText(getActivity().getApplicationContext(), book.getBookName() + " is selected!", Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                bundle.putLong("bookId", book.getBookId());
+                bundle.putString("bookName", book.getBookName());
+                bundle.putString("bookDescription", book.getDescription());
+                bundle.putString("imageUrl", book.getImageUrl());
+                ((MainActivity) getActivity()).replaceFragments(BookSectionsFragment.class, bundle);
+                //Toast.makeText(getActivity().getApplicationContext(), book.getBookName() + " is selected!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onLongClick(View view, int position) {
-                BookResponse book = bookList.get(position);
-                Toast.makeText(getActivity().getApplicationContext(), book.getBookName() + " is long pressed", Toast.LENGTH_SHORT).show();
+
             }
         }));
 
