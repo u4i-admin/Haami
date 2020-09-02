@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
@@ -17,8 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -26,6 +29,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.haami.haami.R;
@@ -41,11 +45,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+import static android.content.Context.MODE_PRIVATE;
 import static com.haami.haami.Constants.getServerUrl;
 
 public class NotFeelingGoodFragment extends Fragment implements View.OnClickListener {
 
-    private RelativeLayout back_dim_layout;
+    private ConstraintLayout back_dim_layout;
     private PopupWindow popupWindow;
     private View popupLayout;
     private static final String TAG = "NotFeelingGoodFragment";
@@ -100,7 +105,41 @@ public class NotFeelingGoodFragment extends Fragment implements View.OnClickList
                 ((MainActivity) getActivity()).replaceFragments(TellYourStoryFragment.class, null);
                 break;
             case R.id.talk_to_constultant_button:
-                sendTalkingRequest();
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPrefs", MODE_PRIVATE);
+                final String token = sharedPreferences.getString("token", null);
+                if (token == null) {
+                    back_dim_layout = getView().getRootView().findViewById(R.id.back_dim_layout);
+                    LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
+                    popupLayout = layoutInflater.inflate(R.layout.popup_must_create_account, null);
+                    popupWindow = new PopupWindow(popupLayout, 800, 800, true);
+
+                    back_dim_layout.setVisibility(View.VISIBLE);
+                    TextView textView = popupWindow.getContentView().findViewById(R.id.textView);
+                    textView.setText(R.string.you_must_create_account_for_consultant);
+                    popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                        @Override
+                        public void onDismiss() {
+                            back_dim_layout.setVisibility(View.GONE);
+                        }
+                    });
+                    popupWindow.showAtLocation(popupLayout, Gravity.CENTER, 0, 0);
+                    popupWindow.getContentView().findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popupWindow.dismiss();
+                        }
+                    });
+                    popupWindow.getContentView().findViewById(R.id.create_account_button).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popupWindow.dismiss();
+                            Intent signInActivity = new Intent(getActivity(), LoginActivity.class);
+                            startActivity(signInActivity);
+                        }
+                    });
+                } else {
+                    sendTalkingRequest();
+                }
                 break;
         }
     }
@@ -163,6 +202,8 @@ public class NotFeelingGoodFragment extends Fragment implements View.OnClickList
                 popupWindow.dismiss();
             }
         });
+        ImageView loading_imageview = popupWindow.getContentView().findViewById(R.id.error_image);
+        Glide.with(this).load(R.drawable.haami_loading).into(loading_imageview);
     }
 
     public void checkForAcceptance() {
@@ -178,6 +219,7 @@ public class NotFeelingGoodFragment extends Fragment implements View.OnClickList
                         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
                         BadFeelingResponse apiResponse = gson.fromJson(response.toString(), BadFeelingResponse.class);
                         Long guideId = apiResponse.getGuideId();
+                        final String guidTelegramId = apiResponse.getGuideTelegramId();
                         if (guideId == null) {
                             if (keepTryingToCheck) {
                                 new Timer().schedule(new TimerTask() {
@@ -189,8 +231,38 @@ public class NotFeelingGoodFragment extends Fragment implements View.OnClickList
                             }
                         } else {
                             popupWindow.dismiss();
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/" + apiResponse.getGuideTelegramId()));
-                            startActivity(browserIntent);
+                            LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
+                            popupLayout = layoutInflater.inflate(R.layout.popup_open_telegram, null);
+                            popupWindow = new PopupWindow(popupLayout, 800, 800, true);
+
+                            back_dim_layout.setVisibility(View.VISIBLE);
+                            popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                                @Override
+                                public void onDismiss() {
+                                    back_dim_layout.setVisibility(View.GONE);
+                                }
+                            });
+                            popupWindow.showAtLocation(popupLayout, Gravity.CENTER, 0, 0);
+                            popupWindow.getContentView().findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    popupWindow.dismiss();
+                                }
+                            });
+                            popupWindow.getContentView().findViewById(R.id.no_button).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    popupWindow.dismiss();
+                                }
+                            });
+                            popupWindow.getContentView().findViewById(R.id.yes_button).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    popupWindow.dismiss();
+                                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/" + guidTelegramId));
+                                    startActivity(browserIntent);
+                                }
+                            });
                         }
                     }
                 }, new Response.ErrorListener() {
