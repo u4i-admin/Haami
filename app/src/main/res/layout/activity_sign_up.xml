@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,110 +7,135 @@
     tools:context="com.haami.haami.SignUpActivity"
     android:background="@color/colorBackground">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/logo_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/login_haami_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="40dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/form_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/logo_image"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:orientation="vertical"
+                android:background="@drawable/login_form_background">
+
+                <EditText
+                    android:id="@+id/name_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:textAlignment="gravity"
+                    android:gravity="right"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/login_input_background"
+                    android:fontFamily="@font/iran_sans"
+                    android:hint="@string/name"
+                    android:padding="7dp" />
+
+                <EditText
+                    android:id="@+id/email_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/login_input_background"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/email_address"
+                    android:padding="7dp" />
+
+                <EditText
+                    android:id="@+id/password_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/login_input_background"
+                    android:fontFamily="@font/iran_sans"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:textAlignment="gravity"
+                    android:gravity="right"
+                    android:padding="7dp" />
+
+                <CheckBox
+                    android:id="@+id/agreement_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/agreement"
+                    android:layoutDirection="rtl"
+                    android:fontFamily="@font/iran_sans"
+                    android:layout_gravity="right"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="15dp" />
+
+                <Button
+                    android:id="@+id/create_account_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="@string/create_account"
+                    android:fontFamily="@font/iran_sans_fa_num_bold"
+                    android:textColor="@color/white"
+                    android:background="@drawable/feeling_better_background"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/agreement_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/underline_background"
+                android:fontFamily="@font/iran_sans"
+                android:paddingBottom="4dp"
+                android:text="@string/haami_agreement"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/form_layout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/back_dim_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C0000000"
+        android:visibility="gone">
 
         <ImageView
-            android:id="@+id/logo_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/login_haami_icon"
+            android:id="@+id/loading_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/haami_loading"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="40dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/form_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/logo_image"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:orientation="vertical"
-            android:background="@drawable/login_form_background">
-
-            <EditText
-                android:id="@+id/name_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:textAlignment="gravity"
-                android:gravity="right"
-                android:layout_marginRight="15dp"
-                android:background="@drawable/login_input_background"
-                android:fontFamily="@font/iran_sans"
-                android:hint="@string/name"
-                android:padding="7dp" />
-
-            <EditText
-                android:id="@+id/email_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:background="@drawable/login_input_background"
-                android:fontFamily="@font/iran_sans"
-                android:inputType="textEmailAddress"
-                android:hint="@string/email_address"
-                android:padding="7dp" />
-
-            <EditText
-                android:id="@+id/password_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:background="@drawable/login_input_background"
-                android:fontFamily="@font/iran_sans"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:textAlignment="gravity"
-                android:gravity="right"
-                android:padding="7dp" />
-
-            <CheckBox
-                android:id="@+id/agreement_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/agreement"
-                android:layoutDirection="rtl"
-                android:fontFamily="@font/iran_sans"
-                android:layout_gravity="right"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="15dp" />
-
-            <Button
-                android:id="@+id/create_account_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="15dp"
-                android:text="@string/create_account"
-                android:fontFamily="@font/iran_sans_fa_num_bold"
-                android:textColor="@color/white"
-                android:background="@drawable/feeling_better_background"
-                android:textSize="18sp" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/agreement_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/underline_background"
-            android:fontFamily="@font/iran_sans"
-            android:paddingBottom="4dp"
-            android:text="@string/haami_agreement"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/form_layout" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

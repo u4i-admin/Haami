@@ -7,11 +7,12 @@
     tools:context="com.haami.haami.BodyScanFragment"
     android:background="@color/colorBackgroundMindFulness">
 
-    <View
+    <ImageView
         android:id="@+id/player_background_view"
-        android:layout_width="175dp"
-        android:layout_height="175dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/body_scan_player_background"
+        android:src="@drawable/body_scan"
         app:layout_constraintBottom_toTopOf="@+id/body_scan_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -20,14 +21,15 @@
 
     <ImageButton
         android:id="@+id/play_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorBackground"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/colorBackgroundMindFulness"
+        android:scaleType="fitCenter"
         android:src="@drawable/relaxation_play_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/player_background_view"
-        app:layout_constraintEnd_toEndOf="@+id/player_background_view"
-        app:layout_constraintStart_toStartOf="@+id/player_background_view"
-        app:layout_constraintTop_toTopOf="@+id/player_background_view" />
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/seekBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/seekBar" />
 
     <TextView
         android:id="@+id/body_scan_text"
@@ -44,11 +46,12 @@
 
     <SeekBar
         android:id="@+id/seekBar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/body_scan_text"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/play_button"
+        app:layout_constraintTop_toBottomOf="@+id/body_scan_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:background="@color/colorBackground"
-        android:src="@drawable/rahro_icon"
+        android:src="@drawable/rahro_active_sign"
         app:layout_constraintEnd_toEndOf="@+id/gauge"
         app:layout_constraintStart_toStartOf="@+id/gauge"
         app:layout_constraintTop_toTopOf="@+id/gauge" />

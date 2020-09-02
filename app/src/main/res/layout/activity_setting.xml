@@ -31,20 +31,58 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/account_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/my_account_big_icon"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/return_button" />
+
+    <TextView
+        android:id="@+id/user_name_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/iran_sans_fa_num_bold"
+        android:text="@string/user_name"
+        android:textAlignment="gravity"
+        android:paddingTop="10dp"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/account_image" />
+
+    <TextView
+        android:id="@+id/email_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/iran_sans"
+        android:gravity="center"
+        android:text="email@example.com"
+        android:textAlignment="gravity"
+        android:padding="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/setting_button_background"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/user_name_textview" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/return_button">
+        app:layout_constraintTop_toBottomOf="@+id/email_textview">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp">
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
             <Button
-                android:id="@+id/my_account_button"
+                android:id="@+id/create_account_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/setting_button_background"
@@ -53,7 +91,7 @@
                 android:fontFamily="@font/iran_sans"
                 android:gravity="right|center"
                 android:padding="20dp"
-                android:text="@string/my_account"
+                android:text="@string/create_account"
                 android:textAlignment="gravity"
                 android:textSize="18sp"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -71,7 +109,7 @@
                 android:text="@string/adjust_clock"
                 android:textAlignment="gravity"
                 android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@id/my_account_button" />
+                app:layout_constraintTop_toBottomOf="@id/create_account_button" />
 
             <Button
                 android:id="@+id/your_comments_button"
@@ -86,6 +124,7 @@
                 android:text="@string/your_comments"
                 android:textAlignment="gravity"
                 android:textSize="18sp"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/clock_adjustment_button" />
 
             <Button
@@ -131,6 +170,7 @@
                 android:text="@string/update"
                 android:textAlignment="gravity"
                 android:textSize="18sp"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/about_haami_button" />
 
             <Button
@@ -143,6 +183,7 @@
                 android:textColor="@color/colorRelaxationActiveTitle"
                 android:textSize="18sp"
                 android:layout_marginTop="20dp"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/update_button"
                 tools:layout_editor_absoluteX="20dp" />
 
