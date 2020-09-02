@@ -3,6 +3,8 @@ package com.haami.haami;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,6 +40,8 @@ public class MagazineFragment extends Fragment {
     List<BookResponse> magazineList = new ArrayList<>();
     private RecyclerView recyclerView;
     private MagazineAdapter adapter;
+    private int totalCount;
+    private int loadedCount = 0;
 
     public MagazineFragment() {
 
@@ -68,26 +72,45 @@ public class MagazineFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                //super.onScrolled(recyclerView, dx, dy);
+
+                if (! recyclerView.canScrollVertically(1) && loadedCount < totalCount){ //1 for down
+                    loadMore();
+                }
+            }
+        });
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
                 BookResponse article = magazineList.get(position);
-                Toast.makeText(getActivity().getApplicationContext(), article.getBookName() + " is selected!", Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                bundle.putLong("bookId", article.getBookId());
+                bundle.putString("bookName", article.getBookName());
+                bundle.putString("bookDescription", article.getDescription());
+                bundle.putString("imageUrl", article.getImageUrl());
+                ((MainActivity) getActivity()).replaceFragments(BookSectionsFragment.class, bundle);
+                //Toast.makeText(getActivity().getApplicationContext(), article.getBookName() + " is selected!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onLongClick(View view, int position) {
-                BookResponse article = magazineList.get(position);
-                Toast.makeText(getActivity().getApplicationContext(), article.getBookName() + " is long pressed", Toast.LENGTH_SHORT).show();
+                //BookResponse article = magazineList.get(position);
+                //Toast.makeText(getActivity().getApplicationContext(), article.getBookName() + " is long pressed", Toast.LENGTH_SHORT).show();
             }
         }));
 
-        String url = "https://haamiapp.com/api/book/byType/2/0/10";
+        loadMore();
+    }
 
-        final ProgressDialog pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Loading...");
-        pDialog.show();
+    private void loadMore() {
+        String url = "https://haamiapp.com/api/book/byType/2/" + loadedCount + "/10";
+
+        final ConstraintLayout back_dim_layout = getView().getRootView().findViewById(R.id.back_dim_layout);
+        back_dim_layout.setVisibility(View.VISIBLE);
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,
@@ -98,15 +121,17 @@ public class MagazineFragment extends Fragment {
                         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
                         BookApiResponse apiResponse = gson.fromJson(response.toString(), BookApiResponse.class);
                         List<BookResponse> data = apiResponse.getData();
+                        totalCount = apiResponse.getCount();
+                        loadedCount += data.size();
                         magazineList.addAll(data);
                         adapter.notifyDataSetChanged();
-                        pDialog.hide();
+                        back_dim_layout.setVisibility(View.GONE);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                pDialog.hide();
+                back_dim_layout.setVisibility(View.GONE);
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjReq, "getMagazines");

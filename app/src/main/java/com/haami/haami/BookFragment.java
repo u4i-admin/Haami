@@ -3,6 +3,8 @@ package com.haami.haami;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,6 +41,8 @@ public class BookFragment extends Fragment {
     List<BookResponse> bookList = new ArrayList<>();
     private RecyclerView recyclerView;
     private BookAdapter adapter;
+    private int totalCount;
+    private int loadedCount = 0;
 
     public BookFragment() {
 
@@ -68,6 +72,16 @@ public class BookFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                //super.onScrolled(recyclerView, dx, dy);
+
+                if (! recyclerView.canScrollVertically(1) && loadedCount < totalCount){ //1 for down
+                    loadMore();
+                }
+            }
+        });
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
@@ -88,11 +102,14 @@ public class BookFragment extends Fragment {
             }
         }));
 
-        String url = Constants.getServerUrl() + "api/book/byType/1/0/10";
+        loadMore();
+    }
 
-        final ProgressDialog pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Loading...");
-        pDialog.show();
+    private void loadMore() {
+        String url = Constants.getServerUrl() + "api/book/byType/1/" + loadedCount + "/10";
+
+        final ConstraintLayout back_dim_layout = getView().getRootView().findViewById(R.id.back_dim_layout);
+        back_dim_layout.setVisibility(View.VISIBLE);
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,
@@ -103,15 +120,17 @@ public class BookFragment extends Fragment {
                         Gson gson = new Gson();
                         BookApiResponse apiResponse = gson.fromJson(response.toString(), BookApiResponse.class);
                         List<BookResponse> data = apiResponse.getData();
+                        totalCount = apiResponse.getCount();
+                        loadedCount += data.size();
                         bookList.addAll(data);
                         adapter.notifyDataSetChanged();
-                        pDialog.hide();
+                        back_dim_layout.setVisibility(View.GONE);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                pDialog.hide();
+                back_dim_layout.setVisibility(View.GONE);
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjReq, "getBooks");

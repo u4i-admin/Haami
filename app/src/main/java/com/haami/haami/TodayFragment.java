@@ -3,6 +3,7 @@ package com.haami.haami;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -88,9 +89,8 @@ public class TodayFragment extends Fragment implements View.OnClickListener {
 
         String url = String.format("%sapi/article/justForToday/%d/%d", getServerUrl(), selectedMonth, selectedDay);
 
-        final ProgressDialog pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Loading...");
-        pDialog.show();
+        final ConstraintLayout back_dim_layout = getView().getRootView().findViewById(R.id.back_dim_layout);
+        back_dim_layout.setVisibility(View.VISIBLE);
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,
@@ -106,13 +106,13 @@ public class TodayFragment extends Fragment implements View.OnClickListener {
                         body_text.setText(String.format("%s\n\n%s", apiResponse.getTitle(), apiResponse.getBody()));
                         selectedDay = Integer.parseInt(currentDate[2]);
                         selectedMonth = Integer.parseInt(currentDate[1]);
-                        pDialog.hide();
+                        back_dim_layout.setVisibility(View.GONE);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("TAG", "Error: " + error.getMessage());
-                pDialog.hide();
+                back_dim_layout.setVisibility(View.GONE);
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjReq, "getJustForToday");

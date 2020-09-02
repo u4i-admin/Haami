@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -98,9 +99,8 @@ public class BookSectionFragment extends Fragment implements View.OnClickListene
 
         String url = getServerUrl() + "api/bookSection/" + bookSectionId;
 
-        final ProgressDialog pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Loading...");
-        pDialog.show();
+        final ConstraintLayout back_dim_layout = getView().getRootView().findViewById(R.id.back_dim_layout);
+        back_dim_layout.setVisibility(View.VISIBLE);
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,
@@ -118,13 +118,13 @@ public class BookSectionFragment extends Fragment implements View.OnClickListene
                             play_pause_button.setVisibility(View.VISIBLE);
                         }
                         audio_file_url = apiResponse.getAudioUrl();
-                        pDialog.hide();
+                        back_dim_layout.setVisibility(View.GONE);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                pDialog.hide();
+                back_dim_layout.setVisibility(View.GONE);
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjReq, "getBookSection");

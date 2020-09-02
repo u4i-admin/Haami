@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -43,7 +44,7 @@ import static com.haami.haami.Constants.getServerUrl;
 
 public class TellYourStoryFragment extends Fragment implements View.OnClickListener {
 
-    private RelativeLayout back_dim_layout;
+    private ConstraintLayout back_dim_layout;
     private PopupWindow popupWindow;
     private View popupLayout;
     private EditText story_text_edittext;
@@ -76,6 +77,7 @@ public class TellYourStoryFragment extends Fragment implements View.OnClickListe
         Button cancel_button = getView().findViewById(R.id.cancel_button);
         Button send_button = getView().findViewById(R.id.send_button);
         story_text_edittext = getView().findViewById(R.id.story_text_edittext);
+        back_dim_layout = getView().getRootView().findViewById(R.id.back_dim_layout);
 
         return_button.setOnClickListener(this);
         cancel_button.setOnClickListener(this);
@@ -94,7 +96,6 @@ public class TellYourStoryFragment extends Fragment implements View.OnClickListe
                 final String token = sharedPreferences.getString("token", null);
 
                 if (token == null) {
-                    back_dim_layout = getView().getRootView().findViewById(R.id.back_dim_layout);
                     LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
                     popupLayout = layoutInflater.inflate(R.layout.popup_must_create_account, null);
                     popupWindow = new PopupWindow(popupLayout, 800, 800, true);
@@ -125,9 +126,7 @@ public class TellYourStoryFragment extends Fragment implements View.OnClickListe
                     String url = getServerUrl() + "api/article/byUser";
                     String bodyText = story_text_edittext.getText().toString();
 
-                    final ProgressDialog pDialog = new ProgressDialog(getContext());
-                    pDialog.setMessage("Loading...");
-                    pDialog.show();
+                    back_dim_layout.setVisibility(View.VISIBLE);
 
                     try {
                         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
@@ -136,7 +135,7 @@ public class TellYourStoryFragment extends Fragment implements View.OnClickListe
                                     @Override
                                     public void onResponse(JSONObject response) {
                                         Log.d("TellYourStoryActivity", response.toString());
-                                        pDialog.hide();
+                                        back_dim_layout.setVisibility(View.GONE);
                                         back_dim_layout = getView().getRootView().findViewById(R.id.back_dim_layout);
                                         LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
                                         popupLayout = layoutInflater.inflate(R.layout.popup_story_sent, null);
@@ -160,8 +159,7 @@ public class TellYourStoryFragment extends Fragment implements View.OnClickListe
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                VolleyLog.d("TellYourStoryActivity", "Error: " + error.networkResponse.statusCode);
-                                back_dim_layout = getView().getRootView().findViewById(R.id.back_dim_layout);
+                                Log.d("TellYourStoryActivity", "Error: " + error.networkResponse.statusCode + "\n" + error.getMessage());
                                 LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
                                 popupLayout = layoutInflater.inflate(R.layout.popup_error, null);
                                 popupWindow = new PopupWindow(popupLayout, 800, 450, true);
@@ -180,7 +178,6 @@ public class TellYourStoryFragment extends Fragment implements View.OnClickListe
                                         popupWindow.dismiss();
                                     }
                                 });
-                                pDialog.hide();
                             }
                         }) {
                             @Override

@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,6 +41,8 @@ public class PlaceFragment extends Fragment {
     List<ArticleResponse> placeList = new ArrayList<>();
     private RecyclerView recyclerView;
     private PlaceAdapter adapter;
+    private int totalCount;
+    private int loadedCount = 0;
 
     public PlaceFragment() {
 
@@ -71,6 +74,16 @@ public class PlaceFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                //super.onScrolled(recyclerView, dx, dy);
+
+                if (! recyclerView.canScrollVertically(1) && loadedCount < totalCount){ //1 for down
+                    loadMore();
+                }
+            }
+        });
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
@@ -89,11 +102,14 @@ public class PlaceFragment extends Fragment {
             }
         }));
 
-        String url = Constants.getServerUrl() + "api/article/byType/3/0/10";
+        loadMore();
+    }
 
-        final ProgressDialog pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Loading...");
-        pDialog.show();
+    private void loadMore() {
+        String url = Constants.getServerUrl() + "api/article/byType/3/" + loadedCount + "/10";
+
+        final ConstraintLayout back_dim_layout = getView().getRootView().findViewById(R.id.back_dim_layout);
+        back_dim_layout.setVisibility(View.VISIBLE);
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,
@@ -104,15 +120,17 @@ public class PlaceFragment extends Fragment {
                         Gson gson = new Gson();
                         ArticleApiResponse apiResponse = gson.fromJson(response.toString(), ArticleApiResponse.class);
                         List<ArticleResponse> data = apiResponse.getData();
+                        totalCount = apiResponse.getCount();
+                        loadedCount += data.size();
                         placeList.addAll(data);
                         adapter.notifyDataSetChanged();
-                        pDialog.hide();
+                        back_dim_layout.setVisibility(View.GONE);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                pDialog.hide();
+                back_dim_layout.setVisibility(View.GONE);
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjReq, "getBooks");
