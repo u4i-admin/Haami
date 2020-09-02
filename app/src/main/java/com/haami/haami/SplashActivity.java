@@ -56,16 +56,16 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void startupCheck() {
-        if (!checkNetworkExists()) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    showNoConnectionPopup();
-                }
-            }, 100);
-        } else {
+        //if (!checkNetworkExists()) {
+        //    new Handler().postDelayed(new Runnable() {
+        //        @Override
+        //        public void run() {
+        //            showNoConnectionPopup();
+        //        }
+        //    }, 100);
+        //} else {
             checkVersion();
-        }
+        //}
     }
 
     private void checkVersion() {
