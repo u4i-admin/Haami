@@ -146,6 +146,7 @@ public class TellYourStoryFragment extends Fragment implements View.OnClickListe
                                             @Override
                                             public void onDismiss() {
                                                 back_dim_layout.setVisibility(View.GONE);
+                                                getActivity().onBackPressed();
                                             }
                                         });
                                         popupWindow.showAtLocation(popupLayout, Gravity.CENTER, 0, 0);
