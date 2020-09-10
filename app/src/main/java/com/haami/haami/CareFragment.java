@@ -105,7 +105,7 @@ public class CareFragment extends Fragment implements View.OnClickListener {
                 image.setImageDrawable(getResources().getDrawable(R.drawable.mindfulness_meditation_begginer));
                 beginner.setBackground(getResources().getDrawable(R.drawable.breathing_active_button_background));
                 advance.setBackground(getResources().getDrawable(R.drawable.breathing_deactive_button_background));
-                beginner.setTextColor(getResources().getColor(R.color.colorRelaxationActiveTitle));
+                beginner.setTextColor(getResources().getColor(R.color.colorBackground));
                 advance.setTextColor(getResources().getColor(R.color.colorRelaxationTitleText));
                 break;
             case R.id.advance_care_button:
@@ -113,7 +113,7 @@ public class CareFragment extends Fragment implements View.OnClickListener {
                 beginner.setBackground(getResources().getDrawable(R.drawable.breathing_deactive_button_background));
                 advance.setBackground(getResources().getDrawable(R.drawable.breathing_active_button_background));
                 beginner.setTextColor(getResources().getColor(R.color.colorRelaxationTitleText));
-                advance.setTextColor(getResources().getColor(R.color.colorRelaxationActiveTitle));
+                advance.setTextColor(getResources().getColor(R.color.colorBackground));
                 break;
             case R.id.play_button:
                 if(!isPlaying) {

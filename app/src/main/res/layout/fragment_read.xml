@@ -27,7 +27,7 @@
         android:text="@string/read"
         android:textSize="22sp"
         android:layout_marginRight="20dp"
-        android:textColor="@color/colorRelaxationActiveTitle"
+        android:textColor="@color/colorBackground"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -66,7 +66,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="20dp"
             android:text="@string/next_article"
-            android:textColor="@color/colorRelaxationActiveTitle"
+            android:textColor="@color/colorBackground"
             android:fontFamily="@font/iran_sans"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -90,7 +90,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/feeling_better"
-            android:textColor="@color/colorRelaxationActiveTitle"
+            android:textColor="@color/colorBackground"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

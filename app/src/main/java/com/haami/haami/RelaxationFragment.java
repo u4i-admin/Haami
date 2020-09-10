@@ -62,21 +62,21 @@ public class RelaxationFragment extends Fragment implements View.OnClickListener
                 ft.replace(R.id.relaxation_frame_placeholder, new BreathingFragment());
                 ft.commit();
                 setUnFocus();
-                btn[0].setTextColor(getResources().getColor(R.color.colorRelaxationActiveTitle));
+                btn[0].setTextColor(getResources().getColor(R.color.colorBackground));
                 btn[0].setBackground(getResources().getDrawable(R.drawable.relaxation_active_tab_background));
                 break;
             case R.id.care_button :
                 ft.replace(R.id.relaxation_frame_placeholder, new CareFragment());
                 ft.commit();
                 setUnFocus();
-                btn[1].setTextColor(getResources().getColor(R.color.colorRelaxationActiveTitle));
+                btn[1].setTextColor(getResources().getColor(R.color.colorBackground));
                 btn[1].setBackground(getResources().getDrawable(R.drawable.relaxation_active_tab_background));
                 break;
             case R.id.body_scan_button :
                 ft.replace(R.id.relaxation_frame_placeholder, new BodyScanFragment());
                 ft.commit();
                 setUnFocus();
-                btn[2].setTextColor(getResources().getColor(R.color.colorRelaxationActiveTitle));
+                btn[2].setTextColor(getResources().getColor(R.color.colorBackground));
                 btn[2].setBackground(getResources().getDrawable(R.drawable.relaxation_active_tab_background));
                 break;
             case R.id.return_button:

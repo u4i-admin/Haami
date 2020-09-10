@@ -26,7 +26,7 @@
         android:fontFamily="@font/iran_sans_bold"
         android:text="@string/relaxation"
         android:textSize="22sp"
-        android:textColor="@color/colorRelaxationActiveTitle"
+        android:textColor="@color/colorBackground"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +82,7 @@
             android:gravity="start|bottom"
             android:text="@string/breathing"
             android:textAlignment="gravity"
-            android:textColor="@color/colorRelaxationActiveTitle"
+            android:textColor="@color/colorBackground"
             android:textSize="18sp" />
 
     </LinearLayout>

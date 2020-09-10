@@ -180,7 +180,7 @@
                 android:background="@drawable/not_feeling_good_background"
                 android:fontFamily="@font/iran_sans"
                 android:text="@string/exit"
-                android:textColor="@color/colorRelaxationActiveTitle"
+                android:textColor="@color/colorBackground"
                 android:textSize="18sp"
                 android:layout_marginTop="20dp"
                 android:visibility="gone"
