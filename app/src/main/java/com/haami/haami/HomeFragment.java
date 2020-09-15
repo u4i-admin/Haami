@@ -204,32 +204,32 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Date
                     rahnavard_sign.setImageDrawable(getResources().getDrawable(R.drawable.rahnavard_sign));
                     pishtaz_sign.setImageDrawable(getResources().getDrawable(R.drawable.pishtaz_sign));
                     pirouz_sign.setImageDrawable(getResources().getDrawable(R.drawable.pirouz_sign));
-                    textView.setText("رهرو");
-                    description_text.setText("توضیح نشان رهرو");
+                    textView.setText(R.string.rahro);
+                    description_text.setText(R.string.rahjoo_sign_description);
                 } else if (value > 30 && value < 91) {
                     current_sign.setImageDrawable(getResources().getDrawable(R.drawable.rahnavard_sign_big));
                     rahro_sign.setImageDrawable(getResources().getDrawable(R.drawable.rahro_sign));
                     rahnavard_sign.setImageDrawable(getResources().getDrawable(R.drawable.rahnavard_active_sign));
                     pishtaz_sign.setImageDrawable(getResources().getDrawable(R.drawable.pishtaz_sign));
                     pirouz_sign.setImageDrawable(getResources().getDrawable(R.drawable.pirouz_sign));
-                    textView.setText("رهنورد");
-                    description_text.setText("توضیح نشان رهنورد");
+                    textView.setText(R.string.rahnavard);
+                    description_text.setText(R.string.rahro_sign_description);
                 } else if (value > 90 && value < 181) {
                     current_sign.setImageDrawable(getResources().getDrawable(R.drawable.pishtaz_sign_big));
                     rahro_sign.setImageDrawable(getResources().getDrawable(R.drawable.rahro_sign));
                     rahnavard_sign.setImageDrawable(getResources().getDrawable(R.drawable.rahnavard_sign));
                     pishtaz_sign.setImageDrawable(getResources().getDrawable(R.drawable.pishtaz_active_sign));
                     pirouz_sign.setImageDrawable(getResources().getDrawable(R.drawable.pirouz_sign));
-                    textView.setText("پیشتاز");
-                    description_text.setText("توضیح نشان پشتاز");
+                    textView.setText(R.string.pishtaz);
+                    description_text.setText(R.string.pishtaz_sign_description);
                 } else if (value > 180) {
                     current_sign.setImageDrawable(getResources().getDrawable(R.drawable.pirouz_sign_big));
                     rahro_sign.setImageDrawable(getResources().getDrawable(R.drawable.rahro_sign));
                     rahnavard_sign.setImageDrawable(getResources().getDrawable(R.drawable.rahnavard_sign));
                     pishtaz_sign.setImageDrawable(getResources().getDrawable(R.drawable.pishtaz_sign));
                     pirouz_sign.setImageDrawable(getResources().getDrawable(R.drawable.pirouz_active_sign));
-                    textView.setText("پیروز");
-                    description_text.setText("توضیح نشان پیروز");
+                    textView.setText(R.string.pirouz);
+                    description_text.setText(R.string.pirouz_sign_description);
                 }
                 break;
             case R.id.setting_button:

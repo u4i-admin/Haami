@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -86,11 +87,12 @@ public class BookSectionFragment extends Fragment implements View.OnClickListene
 
         final ImageButton return_button = getView().findViewById(R.id.return_button);
         seekBar = getView().findViewById(R.id.seekBar);
-        TextView title_textview = getView().findViewById(R.id.title_textview);
+        final TextView title_textview = getView().findViewById(R.id.title_textview);
         final TextView body_text = getView().findViewById(R.id.body_text);
         final NetworkImageView section_image = getView().findViewById(R.id.section_image);
         play_pause_button = getView().findViewById(R.id.play_pause_button);
         final TextView section_name_text = getView().findViewById(R.id.section_name_text);
+        final ScrollView scrollView = getView().findViewById(R.id.scrollView);
 
         return_button.setOnClickListener(this);
         play_pause_button.setOnClickListener(this);
@@ -111,7 +113,18 @@ public class BookSectionFragment extends Fragment implements View.OnClickListene
                         Gson gson = new Gson();
                         BookSectionResponse apiResponse = gson.fromJson(response.toString(), BookSectionResponse.class);
                         body_text.setText(apiResponse.getBody());
-                        section_image.setImageUrl(getServerUrl() + apiResponse.getImageUrl(), AppController.getInstance().getImageLoader());
+                        if(apiResponse.getImageUrl().isEmpty()) {
+                            section_image.setVisibility(View.GONE);
+                            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) scrollView.getLayoutParams();
+                            if(apiResponse.getAudioUrl().isEmpty()) {
+                                params.topToBottom = section_name_text.getId();
+                            } else {
+                                params.topToBottom = play_pause_button.getId();
+                            }
+                            scrollView.requestLayout();
+                        } else {
+                            section_image.setImageUrl(getServerUrl() + apiResponse.getImageUrl(), AppController.getInstance().getImageLoader());
+                        }
                         section_name_text.setText(apiResponse.getTitle());
                         if (!apiResponse.getAudioUrl().isEmpty()) {
                             seekBar.setVisibility(View.VISIBLE);
