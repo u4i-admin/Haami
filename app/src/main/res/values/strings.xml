@@ -16,8 +16,8 @@
     <string name="places">مکان‌های</string>
     <string name="just_for_today">فقط برای امروز</string>
     <string name="signs">نشان‌ها</string>
-    <string name="rahro">رهرو</string>
-    <string name="rahnavard">رهنورد</string>
+    <string name="rahro">رهجو</string>
+    <string name="rahnavard">رهرو</string>
     <string name="pishtaz">پیشتاز</string>
     <string name="pirouz">پیروز</string>
     <string name="read">بخوان</string>
@@ -69,4 +69,8 @@
     <string name="approve_exit_from_app">مطمئن هستید که می‌خواهید\nاز حامی خارج شوید؟</string>
     <string name="user_name">نام کاربر</string>
     <string name="signup_successful">ثبت نام شما با موفقیت انجام شد</string>
+    <string name="rahjoo_sign_description">توضیح نشان رهجو</string>
+    <string name="rahro_sign_description">توضیح نشان رهرو</string>
+    <string name="pishtaz_sign_description">توضیح نشان پشتاز</string>
+    <string name="pirouz_sign_description">توضیح نشان پیروز</string>
 </resources>
