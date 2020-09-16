@@ -1,10 +1,12 @@
 package com.haami.haami;
 
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
@@ -15,6 +17,10 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 
 import com.haami.haami.R;
+
+import java.io.IOException;
+
+import static com.haami.haami.Constants.getServerUrl;
 
 public class BodyScanFragment extends Fragment implements View.OnClickListener {
 
@@ -97,18 +103,45 @@ public class BodyScanFragment extends Fragment implements View.OnClickListener {
             case R.id.play_button:
                 if(!isPlaying) {
                     if (player == null) {
-                        player = MediaPlayer.create(getActivity(), R.raw.body_scan_music);
-                        seekBar.setMax(player.getDuration() / 1000);
+                        final ConstraintLayout back_dim_layout = getView().getRootView().findViewById(R.id.back_dim_layout);
+                        back_dim_layout.setVisibility(View.VISIBLE);
+
+                        player = new MediaPlayer();
+                        player.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                        try {
+                            player.setDataSource(getServerUrl() + "attachment/audio/BodyScan.mp3");
+                            player.prepareAsync();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mp) {
+                                seekBar.setMax(player.getDuration() / 1000);
+                                player.start();
+                                isPlaying = true;
+                                play_button.setImageDrawable(getResources().getDrawable(R.drawable.relaxation_pause_icon));
+                                back_dim_layout.setVisibility(View.GONE);
+                            }
+                        });
+                        player.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                            @Override
+                            public boolean onError(MediaPlayer mp, int what, int extra) {
+                                back_dim_layout.setVisibility(View.GONE);
+                                return false;
+                            }
+                        });
                         player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                             @Override
                             public void onCompletion(MediaPlayer mp) {
                                 StopPlayer();
                             }
                         });
+                    } else {
+                        player.start();
+                        isPlaying = true;
+                        play_button.setImageDrawable(getResources().getDrawable(R.drawable.relaxation_pause_icon));
                     }
-                    player.start();
-                    isPlaying = true;
-                    play_button.setImageDrawable(getResources().getDrawable(R.drawable.relaxation_pause_icon));
                 } else {
                     if (player != null)
                         player.pause();

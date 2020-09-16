@@ -1,8 +1,10 @@
 package com.haami.haami;
 
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
@@ -16,6 +18,10 @@ import android.widget.SeekBar;
 
 import com.haami.haami.R;
 
+import java.io.IOException;
+
+import static com.haami.haami.Constants.getServerUrl;
+
 public class CareFragment extends Fragment implements View.OnClickListener {
 
     ImageButton play_button;
@@ -25,6 +31,8 @@ public class CareFragment extends Fragment implements View.OnClickListener {
     ImageView image;
     Button beginner;
     Button advance;
+    String fileUrl = "attachment/audio/Meditation-Mind.mp3";
+    int currentState = 1;
 
     private Handler mHandler = new Handler();
 
@@ -102,42 +110,85 @@ public class CareFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.beginner_care_button:
-                image.setImageDrawable(getResources().getDrawable(R.drawable.mindfulness_meditation_begginer));
-                beginner.setBackground(getResources().getDrawable(R.drawable.breathing_active_button_background));
-                advance.setBackground(getResources().getDrawable(R.drawable.breathing_deactive_button_background));
-                beginner.setTextColor(getResources().getColor(R.color.colorBackground));
-                advance.setTextColor(getResources().getColor(R.color.colorRelaxationTitleText));
-                break;
-            case R.id.advance_care_button:
-                image.setImageDrawable(getResources().getDrawable(R.drawable.mindfulness_meditation_advance));
-                beginner.setBackground(getResources().getDrawable(R.drawable.breathing_deactive_button_background));
-                advance.setBackground(getResources().getDrawable(R.drawable.breathing_active_button_background));
-                beginner.setTextColor(getResources().getColor(R.color.colorRelaxationTitleText));
-                advance.setTextColor(getResources().getColor(R.color.colorBackground));
-                break;
-            case R.id.play_button:
-                if(!isPlaying) {
-                    if (player == null) {
-                        player = MediaPlayer.create(getActivity(), R.raw.care_music);
-                        seekBar.setMax(player.getDuration() / 1000);
-                        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            @Override
-                            public void onCompletion(MediaPlayer mp) {
-                                StopPlayer();
-                            }
-                        });
-                    }
-                    player.start();
-                    isPlaying = true;
-                    play_button.setImageDrawable(getResources().getDrawable(R.drawable.relaxation_pause_icon));
-                } else {
-                    if (player != null)
-                        player.pause();
-
-                    isPlaying = false;
-                    play_button.setImageDrawable(getResources().getDrawable(R.drawable.relaxation_play_icon));
+                if (currentState != 1) {
+                    currentState = 1;
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.mindfulness_meditation_begginer));
+                    beginner.setBackground(getResources().getDrawable(R.drawable.breathing_active_button_background));
+                    advance.setBackground(getResources().getDrawable(R.drawable.breathing_deactive_button_background));
+                    beginner.setTextColor(getResources().getColor(R.color.colorBackground));
+                    advance.setTextColor(getResources().getColor(R.color.colorRelaxationTitleText));
+                    StopPlayer();
+                    fileUrl = "attachment/audio/Meditation-Mind.mp3";
+                    StartPlayer();
                 }
                 break;
+            case R.id.advance_care_button:
+                if (currentState != 2) {
+                    currentState = 2;
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.mindfulness_meditation_advance));
+                    beginner.setBackground(getResources().getDrawable(R.drawable.breathing_deactive_button_background));
+                    advance.setBackground(getResources().getDrawable(R.drawable.breathing_active_button_background));
+                    beginner.setTextColor(getResources().getColor(R.color.colorRelaxationTitleText));
+                    advance.setTextColor(getResources().getColor(R.color.colorBackground));
+                    StopPlayer();
+                    fileUrl = "attachment/audio/Meditation-Movement.mp3";
+                    StartPlayer();
+                }
+                break;
+            case R.id.play_button:
+                StartPlayer();
+                break;
+        }
+    }
+
+    private void StartPlayer() {
+        if(!isPlaying) {
+            if (player == null) {
+                final ConstraintLayout back_dim_layout = getView().getRootView().findViewById(R.id.back_dim_layout);
+                back_dim_layout.setVisibility(View.VISIBLE);
+
+                player = new MediaPlayer();
+                player.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                try {
+                    player.setDataSource(getServerUrl() + fileUrl);
+                    player.prepareAsync();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mp) {
+                        seekBar.setMax(player.getDuration() / 1000);
+                        player.start();
+                        isPlaying = true;
+                        play_button.setImageDrawable(getResources().getDrawable(R.drawable.relaxation_pause_icon));
+                        back_dim_layout.setVisibility(View.GONE);
+                    }
+                });
+                player.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                    @Override
+                    public boolean onError(MediaPlayer mp, int what, int extra) {
+                        back_dim_layout.setVisibility(View.GONE);
+                        return false;
+                    }
+                });
+                player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        StopPlayer();
+                    }
+                });
+            } else {
+                player.start();
+                isPlaying = true;
+                play_button.setImageDrawable(getResources().getDrawable(R.drawable.relaxation_pause_icon));
+            }
+        } else {
+            if (player != null)
+                player.pause();
+
+            isPlaying = false;
+            play_button.setImageDrawable(getResources().getDrawable(R.drawable.relaxation_play_icon));
         }
     }
 
