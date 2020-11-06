@@ -12,8 +12,8 @@
     <string name="body_scan">اسکن بدن</string>
     <string name="care">مراقبه</string>
     <string name="breathing">تنفس</string>
-    <string name="links">لینک‌های</string>
-    <string name="places">مکان‌های</string>
+    <string name="links">لینک‌ها</string>
+    <string name="places">مکان‌ها</string>
     <string name="just_for_today">فقط برای امروز</string>
     <string name="signs">نشان‌ها</string>
     <string name="rahro">رهجو</string>
@@ -26,7 +26,7 @@
     <string name="next_article">مطلب بعدی</string>
     <string name="feeling_better">حالم بهتر شد</string>
     <string name="advance">پیشرفته</string>
-    <string name="beginner">مبتدی</string>
+    <string name="beginner">مقدماتی</string>
     <string name="no_internet_connection">شما به اینترنت وصل نیستید.</string>
     <string name="error_in_connecting_to_server">خطا در برقراری ارتباط با سرور</string>
     <string name="new_update">نسخه جدید حامی موجود است.</string>
@@ -55,7 +55,7 @@
     <string name="msg_token_fmt">InstanceID Token: %s</string>
     <string name="default_notification_channel_id">proUsers</string>
     <string name="fcm_message">مورد جدید</string>
-    <string name="please_wait">لطفا کمی منتظر بمانید...</string>
+    <string name="please_wait">لطفا کمی منتظر بمانید…</string>
     <string name="accept">می‌پذیرم</string>
     <string name="can_you_response_to_a_rahro">آیا در حال حاضر امکان پاسخگویی به یک رهرو را دارید؟</string>
     <string name="set_clock">تنظیم ساعت</string>
@@ -71,6 +71,23 @@
     <string name="signup_successful">ثبت نام شما با موفقیت انجام شد</string>
     <string name="rahjoo_sign_description">توضیح نشان رهجو</string>
     <string name="rahro_sign_description">توضیح نشان رهرو</string>
-    <string name="pishtaz_sign_description">توضیح نشان پشتاز</string>
+    <string name="pishtaz_sign_description">توضیح نشان پیشتاز</string>
     <string name="pirouz_sign_description">توضیح نشان پیروز</string>
+    <string name="mind_care">مراقبه ذهن</string>
+    <string name="moving_care">مراقبه حرکتی</string>
+    <string name="mind_care_body_text">با انجام این تکنیک، می‌توانیم مشاهده‌گری باشیم که به جای اهمیت به افکار و احساسات مزاحم، با مهر، توجه خود را به بودن در لحظه حال برگردانیم.</string>
+    <string name="moving_care_body_text">در انجام این تکنیک، ما فرصتی برای آشنایی با بدن خود پیدا می‌کنیم و از تنش‌هایی که در بدن ما مانده، با حرکت دادن بدن رها می‌شویم. برای چند دقیقه‌ با چشمان بسته، صدای بدن خود را در حرکت می‌شنویم.</string>
+    <string name="body_scan_body_text">با انجام تکنیک بادی‌اسکن، با بردن توجه خود به نقاط مختلف بدن، در کنار رشد آرامش، آگاهی و درک خود را از حواس و جسم خود بالا می‌بریم.</string>
+    <string name="breathing_beginner_body_text">با باز و بسته شدن گل‌برگ‌ها، با سه شماره دم و با سه شماره بازدم انجام می‌دهیم.</string>
+    <string name="breathing_advance_body_text">با بازشدن و بسته شدن گل‌برگ‌ها، با سه شماره دم، سه شماره نفس را حبس، و با سه شماره بازدم انجام می‌دهیم.</string>
+    <string name="just_for_today_tutorial_text">خاطرات، توصیه‌ها و دلنوشته‌های روزانه</string>
+    <string name="next">بعدی</string>
+    <string name="calendar_tutorial_text">با استفاده از این روزشمار تغییرات و پیشرفت خود را ارزیابی کنید.</string>
+    <string name="next_with_anchor"><![CDATA[< بعدی]]></string>
+    <string name="bad_feeling_tutorial_text">در این بخش، با خواندن، بازی و یا صحبت با یک مشاور حالتان بهتر می‌شود.</string>
+    <string name="library_tutorial_text">کتاب، مجله، کتاب‌ شنیداری، و مقالات مفید را اینجا پیدا کنید.</string>
+    <string name="relaxation_tutorial_text">با کمک این تمرین‌ها ذهن و بدن خود را آرام کنید.</string>
+    <string name="places_tutorial_text">فهرستی از مکان‌های مفید اینجا در دسترس شماست.</string>
+    <string name="setting_tutorial_text">برای تغییر تنظیمات اپلیکیشن این آیکون را لمس کنید.</string>
+    <string name="close_with_x">X بستن</string>
 </resources>
