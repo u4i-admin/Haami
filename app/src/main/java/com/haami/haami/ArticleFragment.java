@@ -94,7 +94,7 @@ public class ArticleFragment extends Fragment {
                 bundle.putString("bookName", article.getBookName());
                 bundle.putString("bookDescription", article.getDescription());
                 bundle.putString("imageUrl", article.getImageUrl());
-                ((MainActivity) getActivity()).replaceFragments(BookSectionsFragment.class, bundle);
+                ((MainActivity) getActivity()).replaceFragments(BookSectionFragment.class, bundle);
                 //Toast.makeText(getActivity().getApplicationContext(), article.getBookName() + " is selected!", Toast.LENGTH_SHORT).show();
             }
 

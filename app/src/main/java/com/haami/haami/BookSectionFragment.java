@@ -33,6 +33,7 @@ import com.google.gson.Gson;
 import com.haami.haami.adapters.BookSectionAdapter;
 import com.haami.haami.app.AppController;
 import com.haami.haami.models.apiResponse.BookSectionApiResponse;
+import com.haami.haami.models.responses.BookResponse;
 import com.haami.haami.models.responses.BookSectionResponse;
 import com.haami.haami.utils.RecyclerTouchListener;
 
@@ -47,6 +48,7 @@ public class BookSectionFragment extends Fragment implements View.OnClickListene
 
     private static final String TAG = "";
     private Long bookSectionId;
+    private Long bookId;
     private String bookName;
     private SeekBar seekBar;
     private ImageButton play_pause_button;
@@ -77,6 +79,7 @@ public class BookSectionFragment extends Fragment implements View.OnClickListene
 
         Bundle bundle = this.getArguments();
         bookSectionId = bundle.getLong("bookSectionId");
+        bookId = bundle.getLong("bookId");
         bookName = bundle.getString("bookName");
         return v;
     }
@@ -88,18 +91,109 @@ public class BookSectionFragment extends Fragment implements View.OnClickListene
         final ImageButton return_button = getView().findViewById(R.id.return_button);
         seekBar = getView().findViewById(R.id.seekBar);
         final TextView title_textview = getView().findViewById(R.id.title_textview);
-        final TextView body_text = getView().findViewById(R.id.body_text);
-        final NetworkImageView section_image = getView().findViewById(R.id.section_image);
         play_pause_button = getView().findViewById(R.id.play_pause_button);
-        final TextView section_name_text = getView().findViewById(R.id.section_name_text);
-        final ScrollView scrollView = getView().findViewById(R.id.scrollView);
 
         return_button.setOnClickListener(this);
         play_pause_button.setOnClickListener(this);
 
         title_textview.setText(bookName);
 
+        if (bookSectionId != 0) {
+            loadSection();
+        } else {
+            loadBook();
+        }
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(player != null){
+                    int mCurrentPosition = player.getCurrentPosition() / 1000;
+                    seekBar.setProgress(mCurrentPosition);
+                }
+                mHandler.postDelayed(this, 1000);
+            }
+        });
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if(player != null && fromUser) {
+                    player.seekTo(progress * 1000);
+                }
+            }
+        });
+    }
+
+    private void loadBook() {
+        String url = getServerUrl() + "api/book/" + bookId;
+        final TextView body_text = getView().findViewById(R.id.body_text);
+        final NetworkImageView section_image = getView().findViewById(R.id.section_image);
+        final ScrollView scrollView = getView().findViewById(R.id.scrollView);
+        final TextView section_name_text = getView().findViewById(R.id.section_name_text);
+
+        final ConstraintLayout back_dim_layout = getView().getRootView().findViewById(R.id.back_dim_layout);
+        back_dim_layout.setVisibility(View.VISIBLE);
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, response.toString());
+                        Gson gson = new Gson();
+                        BookResponse apiResponse = gson.fromJson(response.toString(), BookResponse.class);
+                        if (apiResponse.getSectionCount() > 0) {
+                            BookSectionResponse sectionResponse = apiResponse.getSections().get(0);
+                            body_text.setText(sectionResponse.getBody());
+                            if (apiResponse.getImageUrl().isEmpty()) {
+                                section_image.setVisibility(View.GONE);
+                                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) scrollView.getLayoutParams();
+                                if (sectionResponse.getAudioUrl().isEmpty()) {
+                                    params.topToBottom = section_name_text.getId();
+                                } else {
+                                    params.topToBottom = play_pause_button.getId();
+                                }
+                                scrollView.requestLayout();
+                            } else {
+                                section_image.setImageUrl(getServerUrl() + apiResponse.getImageUrl(), AppController.getInstance().getImageLoader());
+                            }
+                            section_name_text.setText(sectionResponse.getTitle());
+                            if (!sectionResponse.getAudioUrl().isEmpty()) {
+                                seekBar.setVisibility(View.VISIBLE);
+                                play_pause_button.setVisibility(View.VISIBLE);
+                            }
+                            audio_file_url = sectionResponse.getAudioUrl();
+                        }
+                        back_dim_layout.setVisibility(View.GONE);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                back_dim_layout.setVisibility(View.GONE);
+            }
+        });
+        AppController.getInstance().addToRequestQueue(jsonObjReq, "getBook");
+    }
+
+    private void loadSection() {
         String url = getServerUrl() + "api/bookSection/" + bookSectionId;
+        final TextView body_text = getView().findViewById(R.id.body_text);
+        final NetworkImageView section_image = getView().findViewById(R.id.section_image);
+        final ScrollView scrollView = getView().findViewById(R.id.scrollView);
+        final TextView section_name_text = getView().findViewById(R.id.section_name_text);
 
         final ConstraintLayout back_dim_layout = getView().getRootView().findViewById(R.id.back_dim_layout);
         back_dim_layout.setVisibility(View.VISIBLE);
@@ -141,37 +235,6 @@ public class BookSectionFragment extends Fragment implements View.OnClickListene
             }
         });
         AppController.getInstance().addToRequestQueue(jsonObjReq, "getBookSection");
-
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if(player != null){
-                    int mCurrentPosition = player.getCurrentPosition() / 1000;
-                    seekBar.setProgress(mCurrentPosition);
-                }
-                mHandler.postDelayed(this, 1000);
-            }
-        });
-
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if(player != null && fromUser) {
-                    player.seekTo(progress * 1000);
-                }
-            }
-        });
     }
 
     @Override
