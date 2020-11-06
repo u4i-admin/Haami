@@ -52,7 +52,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> 
         holder.image.setImageUrl(Constants.getServerUrl() + place.getPicUrl(), AppController.getInstance().getImageLoader());
         holder.title.setText(place.getTitle());
         holder.category.setText(place.getCategoryName());
-        holder.address.setText(place.getBody());
+        holder.address.setText(place.getAddress());
     }
 
     @Override
