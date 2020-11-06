@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.haami.haami.R;
 
@@ -31,6 +32,7 @@ public class CareFragment extends Fragment implements View.OnClickListener {
     ImageView image;
     Button beginner;
     Button advance;
+    TextView textView;
     String fileUrl = "attachment/audio/Meditation-Mind.mp3";
     int currentState = 1;
 
@@ -63,7 +65,7 @@ public class CareFragment extends Fragment implements View.OnClickListener {
         beginner = getView().findViewById(R.id.beginner_care_button);
         advance = getView().findViewById(R.id.advance_care_button);
         image = getView().findViewById(R.id.player_background_view);
-
+        textView = getView().findViewById(R.id.body_scan_text);
         play_button.setOnClickListener(this);
         beginner.setOnClickListener(this);
         advance.setOnClickListener(this);
@@ -117,6 +119,7 @@ public class CareFragment extends Fragment implements View.OnClickListener {
                     advance.setBackground(getResources().getDrawable(R.drawable.breathing_deactive_button_background));
                     beginner.setTextColor(getResources().getColor(R.color.colorBackground));
                     advance.setTextColor(getResources().getColor(R.color.colorRelaxationTitleText));
+                    textView.setText(R.string.mind_care_body_text);
                     StopPlayer();
                     fileUrl = "attachment/audio/Meditation-Mind.mp3";
                     StartPlayer();
@@ -130,6 +133,7 @@ public class CareFragment extends Fragment implements View.OnClickListener {
                     advance.setBackground(getResources().getDrawable(R.drawable.breathing_active_button_background));
                     beginner.setTextColor(getResources().getColor(R.color.colorRelaxationTitleText));
                     advance.setTextColor(getResources().getColor(R.color.colorBackground));
+                    textView.setText(R.string.moving_care_body_text);
                     StopPlayer();
                     fileUrl = "attachment/audio/Meditation-Movement.mp3";
                     StartPlayer();

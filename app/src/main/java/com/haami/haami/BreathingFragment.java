@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
@@ -22,6 +23,7 @@ public class BreathingFragment extends Fragment implements View.OnClickListener 
     Button advance_breathing_button;
     Button beginner_breathing_button;
     ImageView imageView;
+    TextView textView;
 
     public BreathingFragment() {
 
@@ -48,6 +50,7 @@ public class BreathingFragment extends Fragment implements View.OnClickListener 
         advance_breathing_button = getView().findViewById(R.id.advance_breathing_button);
         beginner_breathing_button = getView().findViewById(R.id.beginner_breathing_button);
         imageView = getView().findViewById(R.id.imageView);
+        textView = getView().findViewById(R.id.body_scan_text);
 
         Glide.with(this).load(R.drawable.breathing_a).into(imageView);
 
@@ -66,6 +69,7 @@ public class BreathingFragment extends Fragment implements View.OnClickListener 
                 beginner_breathing_button.setTextColor(getResources().getColor(R.color.colorRelaxationTitleText));
 
                 Glide.with(this).load(R.drawable.breathing_b).into(imageView);
+                textView.setText(R.string.breathing_advance_body_text);
                 break;
             case R.id.beginner_breathing_button:
                 beginner_breathing_button.setBackground(getResources().getDrawable(R.drawable.breathing_active_button_background));
@@ -75,6 +79,7 @@ public class BreathingFragment extends Fragment implements View.OnClickListener 
                 advance_breathing_button.setTextColor(getResources().getColor(R.color.colorRelaxationTitleText));
 
                 Glide.with(this).load(R.drawable.breathing_a).into(imageView);
+                textView.setText(R.string.breathing_beginner_body_text);
                 break;
         }
     }
