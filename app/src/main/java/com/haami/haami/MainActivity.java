@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -55,6 +56,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ConstraintLayout back_dim_layout;
     private PopupWindow popupWindow;
     private View popupLayout;
+    private int SHOW_TUTORIAL_DELAY_LENGTH = 1500;
+    ConstraintLayout just_for_today_tutorial;
+    ConstraintLayout calendar_tutorial;
+    ConstraintLayout bad_feeling_tutorial;
+    ConstraintLayout library_tutorial;
+    ConstraintLayout relaxation_tutorial;
+    ConstraintLayout places_tutorial;
+    ConstraintLayout setting_tutorial;
+    ConstraintLayout tutorial_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +76,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
         popupLayout = layoutInflater.inflate(R.layout.popup_exit, null);
         popupWindow = new PopupWindow(popupLayout, 800, 700, true);
+        just_for_today_tutorial = findViewById(R.id.just_for_today_tutorial);
+        calendar_tutorial = findViewById(R.id.calendar_tutorial);
+        bad_feeling_tutorial = findViewById(R.id.bad_feeling_tutorial);
+        library_tutorial = findViewById(R.id.library_tutorial);
+        relaxation_tutorial = findViewById(R.id.relaxation_tutorial);
+        places_tutorial = findViewById(R.id.places_tutorial);
+        setting_tutorial = findViewById(R.id.setting_tutorial);
+        tutorial_layout = findViewById(R.id.tutorial_layout);
 
         Glide.with(this).load(R.drawable.haami_loading).into(loading_image);
 
@@ -74,9 +92,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             btn[i].setOnClickListener(this);
         }
 
+        final Button just_for_today_tutorial_next_button = findViewById(R.id.just_for_today_tutorial_next_button);
+        just_for_today_tutorial_next_button.setOnClickListener(this);
+        final Button calendar_tutorial_next_button = findViewById(R.id.calendar_tutorial_next_button);
+        calendar_tutorial_next_button.setOnClickListener(this);
+        final Button bad_feeling_tutorial_next_button = findViewById(R.id.bad_feeling_tutorial_next_button);
+        bad_feeling_tutorial_next_button.setOnClickListener(this);
+        final Button library_tutorial_next_button = findViewById(R.id.library_tutorial_next_button);
+        library_tutorial_next_button.setOnClickListener(this);
+        final Button relaxation_tutorial_next_button = findViewById(R.id.relaxation_tutorial_next_button);
+        relaxation_tutorial_next_button.setOnClickListener(this);
+        final Button places_tutorial_next_button = findViewById(R.id.places_tutorial_next_button);
+        places_tutorial_next_button.setOnClickListener(this);
+        final Button setting_tutorial_close_button = findViewById(R.id.setting_tutorial_close_button);
+        setting_tutorial_close_button.setOnClickListener(this);
+
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
         boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
         boolean isProUser = sharedPreferences.getBoolean("isProUser", false);
+        boolean isTutorialShowed = sharedPreferences.getBoolean("isTutorialShowed", false);
+
+        if (!isTutorialShowed) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    tutorial_layout.setVisibility(View.VISIBLE);
+                    just_for_today_tutorial.setVisibility(View.VISIBLE);
+                }
+            }, SHOW_TUTORIAL_DELAY_LENGTH);
+        }
 
         if (isLoggedIn && isProUser) {
             FirebaseInstanceId.getInstance().getInstanceId()
@@ -141,6 +185,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     btn[3].setTextColor(getResources().getColor(R.color.colorActiveText));
                     btn[3].setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.places_icon_active, 0, 0);
                 }
+                break;
+            case R.id.just_for_today_tutorial_next_button:
+                just_for_today_tutorial.setVisibility(View.GONE);
+                calendar_tutorial.setVisibility(View.VISIBLE);
+                break;
+            case R.id.calendar_tutorial_next_button:
+                calendar_tutorial.setVisibility(View.GONE);
+                bad_feeling_tutorial.setVisibility(View.VISIBLE);
+                break;
+            case R.id.bad_feeling_tutorial_next_button:
+                bad_feeling_tutorial.setVisibility(View.GONE);
+                library_tutorial.setVisibility(View.VISIBLE);
+                break;
+            case R.id.library_tutorial_next_button:
+                library_tutorial.setVisibility(View.GONE);
+                relaxation_tutorial.setVisibility(View.VISIBLE);
+                break;
+            case R.id.relaxation_tutorial_next_button:
+                relaxation_tutorial.setVisibility(View.GONE);
+                places_tutorial.setVisibility(View.VISIBLE);
+                break;
+            case R.id.places_tutorial_next_button:
+                places_tutorial.setVisibility(View.GONE);
+                setting_tutorial.setVisibility(View.VISIBLE);
+                break;
+            case R.id.setting_tutorial_close_button:
+                setting_tutorial.setVisibility(View.GONE);
+                tutorial_layout.setVisibility(View.GONE);
+                SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("isTutorialShowed", true);
+                editor.commit();
                 break;
         }
     }
