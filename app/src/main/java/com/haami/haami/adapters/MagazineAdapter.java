@@ -51,7 +51,7 @@ public class MagazineAdapter extends RecyclerView.Adapter<MagazineAdapter.ViewHo
         BookResponse book = books.get(position);
         holder.image.setImageUrl(Constants.getServerUrl() + book.getImageUrl(), AppController.getInstance().getImageLoader());
         holder.title.setText(book.getBookName());
-        holder.number_date.setText(String.format("%s - %s", book.getMagazineNumber(), book.getReleaseDatePersian()));
+        holder.number_date.setText(String.format(book.getMagazineNumber() == null || book.getReleaseDatePersian() == null ? "%s %s" : "%s - %s", book.getMagazineNumber() == null ? "" : book.getMagazineNumber(), book.getReleaseDatePersian() == null ? "" : book.getReleaseDatePersian()));
         holder.description.setText(book.getDescription());
     }
 
