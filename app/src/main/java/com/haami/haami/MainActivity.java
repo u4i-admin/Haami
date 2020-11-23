@@ -10,8 +10,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -378,5 +380,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 popupWindow.dismiss();
             }
         });
+    }
+
+    public void runOrInstallApp(String packageName) {
+        boolean isAppInstalled = appInstalledOrNot(packageName);
+        if(isAppInstalled) {
+            Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage(packageName);
+            startActivity(LaunchIntent);
+        } else {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + packageName));
+            startActivity(browserIntent);
+        }
+    }
+
+    private boolean appInstalledOrNot(String uri) {
+        PackageManager pm = getPackageManager();
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+        }
+
+        return false;
     }
 }

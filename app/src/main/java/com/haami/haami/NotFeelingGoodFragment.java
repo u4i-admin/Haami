@@ -85,9 +85,11 @@ public class NotFeelingGoodFragment extends Fragment implements View.OnClickList
         Button read_button = getView().findViewById(R.id.read_button);
         Button tell_your_story_button = getView().findViewById(R.id.tell_your_story_button);
         Button talk_to_constultant_button = getView().findViewById(R.id.talk_to_constultant_button);
+        Button play_button = getView().findViewById(R.id.play_button);
 
         close_button.setOnClickListener(this);
         read_button.setOnClickListener(this);
+        play_button.setOnClickListener(this);
         tell_your_story_button.setOnClickListener(this);
         talk_to_constultant_button.setOnClickListener(this);
     }
@@ -103,6 +105,9 @@ public class NotFeelingGoodFragment extends Fragment implements View.OnClickList
                 break;
             case R.id.tell_your_story_button:
                 ((MainActivity) getActivity()).replaceFragments(TellYourStoryFragment.class, null);
+                break;
+            case R.id.play_button:
+                ((MainActivity) getActivity()).replaceFragments(GameFragment.class, null);
                 break;
             case R.id.talk_to_constultant_button:
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPrefs", MODE_PRIVATE);
