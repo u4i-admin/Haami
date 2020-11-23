@@ -35,6 +35,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.haami.haami.Constants.getServerUrl;
+
 public class MagazineFragment extends Fragment {
     private static final String TAG = "";
     List<BookResponse> magazineList = new ArrayList<>();
@@ -107,7 +109,7 @@ public class MagazineFragment extends Fragment {
     }
 
     private void loadMore() {
-        String url = "https://haamiapp.com/api/book/byType/2/" + loadedCount + "/10";
+        String url = getServerUrl() + "api/book/byType/2/" + loadedCount + "/10";
 
         final ConstraintLayout back_dim_layout = getView().getRootView().findViewById(R.id.back_dim_layout);
         back_dim_layout.setVisibility(View.VISIBLE);

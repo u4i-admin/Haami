@@ -38,6 +38,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.haami.haami.Constants.getServerUrl;
+
 public class LinkFragment extends Fragment {
 
     private static final String TAG = "";
@@ -108,7 +110,7 @@ public class LinkFragment extends Fragment {
     }
 
     private void loadMore() {
-        String url = "https://haamiapp.com/api/article/byType/5/" + loadedCount + "/10";
+        String url = getServerUrl() + "api/article/byType/5/" + loadedCount + "/10";
 
         final ConstraintLayout back_dim_layout = getView().getRootView().findViewById(R.id.back_dim_layout);
         back_dim_layout.setVisibility(View.VISIBLE);

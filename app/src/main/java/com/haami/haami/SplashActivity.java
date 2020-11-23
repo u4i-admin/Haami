@@ -160,7 +160,8 @@ public class SplashActivity extends AppCompatActivity {
         popupWindow.getContentView().findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                popupWindow.dismiss();
+                loadMainActivity();
             }
         });
         popupWindow.getContentView().findViewById(R.id.update_button).setOnClickListener(new View.OnClickListener() {
