@@ -1,6 +1,7 @@
 package com.haami.haami;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
@@ -39,6 +40,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.haami.haami.Constants.getServerUrl;
 
 public class SingleMagazineFragment extends Fragment implements View.OnClickListener {
@@ -67,7 +69,10 @@ public class SingleMagazineFragment extends Fragment implements View.OnClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("lastLibraryFragment", 2);
+        editor.apply();
     }
 
     @Override

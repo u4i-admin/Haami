@@ -1,6 +1,7 @@
 package com.haami.haami;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.haami.haami.Constants.getServerUrl;
 
 public class BookSectionsFragment extends Fragment {
@@ -72,6 +74,11 @@ public class BookSectionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_book_sections, container, false);
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("lastLibraryFragment", 1);
+        editor.apply();
 
         Bundle bundle = this.getArguments();
         bookId = bundle.getLong("bookId");

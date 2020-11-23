@@ -1,5 +1,6 @@
 package com.haami.haami;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.haami.haami.R;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class LibraryFragment extends Fragment implements View.OnClickListener  {
 
@@ -43,14 +46,28 @@ public class LibraryFragment extends Fragment implements View.OnClickListener  {
         ImageButton return_button = getView().findViewById(R.id.return_button);
         return_button.setOnClickListener(this);
 
-        for(int i = 0; i < btn.length; i++){
+        for (int i = 0; i < btn.length; i++) {
             btn[i] = getView().findViewById(btn_id[i]);
             btn[i].setOnClickListener(this);
         }
 
-        Fragment childFragment = new BookFragment();
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.library_frame_placeholder, childFragment).commit();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPrefs", MODE_PRIVATE);
+        int lastFragment = sharedPreferences.getInt("lastLibraryFragment", 0);
+
+        Fragment childFragment;
+        if (lastFragment == 3) {
+            View v = getView().findViewById(R.id.article_button);
+            onClick(v);
+            //childFragment = new ArticleFragment();
+        } else if (lastFragment == 2) {
+            View v = getView().findViewById(R.id.magazine_button);
+            onClick(v);
+            //childFragment = new MagazineFragment();
+        } else {
+            childFragment = new BookFragment();
+            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+            transaction.replace(R.id.library_frame_placeholder, childFragment).commit();
+        }
     }
 
     @Override

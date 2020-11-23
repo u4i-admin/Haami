@@ -1,6 +1,7 @@
 package com.haami.haami;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import com.google.gson.Gson;
 import com.haami.haami.adapters.BookSectionAdapter;
 import com.haami.haami.app.AppController;
 import com.haami.haami.models.apiResponse.BookSectionApiResponse;
+import com.haami.haami.models.enums.BookTypeEnum;
 import com.haami.haami.models.responses.BookResponse;
 import com.haami.haami.models.responses.BookSectionResponse;
 import com.haami.haami.utils.RecyclerTouchListener;
@@ -42,6 +44,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.haami.haami.Constants.getServerUrl;
 
 public class BookSectionFragment extends Fragment implements View.OnClickListener {
@@ -102,6 +105,10 @@ public class BookSectionFragment extends Fragment implements View.OnClickListene
             loadSection();
         } else {
             loadBook();
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("lastLibraryFragment", 3);
+            editor.apply();
         }
 
         getActivity().runOnUiThread(new Runnable() {
