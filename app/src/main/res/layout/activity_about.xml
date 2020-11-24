@@ -51,15 +51,33 @@
         app:layout_constraintTop_toBottomOf="@+id/haami_image">
 
         <TextView
+            android:id="@+id/about_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/iran_sans"
             android:layout_marginBottom="20dp"
             android:textSize="18sp"
-            android:text="اعتیاد (همچنین:خوگری) حالتی است که در آن شخص به علت روانی یا مصرف مواد شیمیایی، طبیعی دچار ضعف اراده درکنترل تکرار اعمال خود می‌شود. هرچند ضعف اراده در خود بیماری نیست ولی به علت عوارضی که بر دستگاه عصبی مرکزی شخص ایجاد شده به عنوان بیماری فرض می‌شود و این بیماری با ایجاد اختلال در کنترل بر سیستم رفتار-پاداش، باعث تکرار آن رفتار می‌گردد.[۱] بیماری اعتیاد مدارهای عصبی مربوط به نظام پاداش، انگیزش، و حافظه را در مغز دچار اختلال کرده، و اختلال در این سیستم‌ها در مغز باعث بروز عوارض بیولوژیکی، فیزیولوژیکی، اجتماعی و روحی می‌گردد.[۲] بررسی اعتیاد به عنوان عارضه‌ای روانی، اجتماعی و اقتصادی از دیدگاه علوم پزشکی، روان‌شناسی و جامعه‌شناسی و همین‌طور از دیدگاه‌های فلسفه، قانون، اخلاق و مذهب صورت می‌گیرد. از سال ۱۹۶۴ میلادی، سازمان بهداشت جهانی استفاده از عبارت وابستگی دارویی یا وابستگی به دارو را به جای اصطلاح اعتیاد توصیه نموده‌است.
-
-در عموم به لحاظ مفهومی، بیماری اعتیاد یک بیماری اصلی، مزمن و عصبی است، که در اثر عواملی ژنتیکی، فیزیولوژیک و اجتماعی رشد و بروز پیدا می‌کند، به‌طوری‌که وجه مشخص این بیماری اختلال در کنترل انجام عملی، یا احساس اجبار در انجام یک عمل مشخص، با وجود آگاهی نسبت به عواقب خطرناک آن باشد." />
+            android:text="" />
 
     </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/back_dim_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C0000000"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/loading_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/haami_loading"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
