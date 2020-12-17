@@ -9,8 +9,8 @@ android {
         applicationId "com.haami.haami"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 202
-        versionName "2.0.2b"
+        versionCode 205
+        versionName "2.0.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -40,7 +40,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'pl.pawelkleczkowski.customgauge:CustomGauge:1.0.4'
     implementation 'com.google.firebase:firebase-analytics:17.5.0'
-    implementation 'com.google.firebase:firebase-messaging:20.2.4'
     implementation 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
