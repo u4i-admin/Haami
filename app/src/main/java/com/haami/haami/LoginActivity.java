@@ -130,26 +130,48 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.networkResponse.statusCode);
-                if (error.networkResponse.statusCode == 401) {
-                    LayoutInflater layoutInflater = (LayoutInflater) LoginActivity.this.getSystemService(LAYOUT_INFLATER_SERVICE);
-                    popupLayout = layoutInflater.inflate(R.layout.popup_wrong_password, null);
-                    popupWindow = new PopupWindow(popupLayout, 800, 320, true);
+                if (error.networkResponse != null) {
+                    VolleyLog.d(TAG, "Error: " + error.networkResponse.statusCode);
+                    if (error.networkResponse.statusCode == 401) {
+                        LayoutInflater layoutInflater = (LayoutInflater) LoginActivity.this.getSystemService(LAYOUT_INFLATER_SERVICE);
+                        popupLayout = layoutInflater.inflate(R.layout.popup_wrong_password, null);
+                        popupWindow = new PopupWindow(popupLayout, 800, 320, true);
 
-                    back_dim_layout.setVisibility(View.VISIBLE);
-                    popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                        @Override
-                        public void onDismiss() {
-                            back_dim_layout.setVisibility(View.GONE);
-                        }
-                    });
-                    popupWindow.showAtLocation(popupLayout, Gravity.CENTER, 0, 0);
-                    popupWindow.getContentView().findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            popupWindow.dismiss();
-                        }
-                    });
+                        back_dim_layout.setVisibility(View.VISIBLE);
+                        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                            @Override
+                            public void onDismiss() {
+                                back_dim_layout.setVisibility(View.GONE);
+                            }
+                        });
+                        popupWindow.showAtLocation(popupLayout, Gravity.CENTER, 0, 0);
+                        popupWindow.getContentView().findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popupWindow.dismiss();
+                            }
+                        });
+                    } else {
+                        back_dim_layout = findViewById(R.id.back_dim_layout);
+                        LayoutInflater layoutInflater = (LayoutInflater) LoginActivity.this.getSystemService(LAYOUT_INFLATER_SERVICE);
+                        popupLayout = layoutInflater.inflate(R.layout.popup_error, null);
+                        popupWindow = new PopupWindow(popupLayout, 800, 320, true);
+
+                        back_dim_layout.setVisibility(View.VISIBLE);
+                        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                            @Override
+                            public void onDismiss() {
+                                back_dim_layout.setVisibility(View.GONE);
+                            }
+                        });
+                        popupWindow.showAtLocation(popupLayout, Gravity.CENTER, 0, 0);
+                        popupWindow.getContentView().findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popupWindow.dismiss();
+                            }
+                        });
+                    }
                 } else {
                     back_dim_layout = findViewById(R.id.back_dim_layout);
                     LayoutInflater layoutInflater = (LayoutInflater) LoginActivity.this.getSystemService(LAYOUT_INFLATER_SERVICE);

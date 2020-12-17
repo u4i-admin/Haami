@@ -127,34 +127,56 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.networkResponse.statusCode);
-                LayoutInflater layoutInflater = (LayoutInflater) SignUpActivity.this.getSystemService(LAYOUT_INFLATER_SERVICE);
-                popupLayout = layoutInflater.inflate(R.layout.popup_error, null);
-                popupWindow = new PopupWindow(popupLayout, 800, 320, true);
-                String errorText = null;
-                try {
-                    errorText = new String(error.networkResponse.data,"UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                if (errorText != null && errorText.contains("Email")) {
-                    TextView textView = popupWindow.getContentView().findViewById(R.id.textView);
-                    textView.setText("این ایمیل قبلا ثبت شده است.\n لطفا از یک ایمیل دیگر جهت ثبت نام استفاده کنید");
-                }
-                back_dim_layout.setVisibility(View.VISIBLE);
-                popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                    @Override
-                    public void onDismiss() {
-                        back_dim_layout.setVisibility(View.GONE);
+                if (error.networkResponse != null) {
+                    VolleyLog.d(TAG, "Error: " + error.networkResponse.statusCode);
+                    LayoutInflater layoutInflater = (LayoutInflater) SignUpActivity.this.getSystemService(LAYOUT_INFLATER_SERVICE);
+                    popupLayout = layoutInflater.inflate(R.layout.popup_error, null);
+                    popupWindow = new PopupWindow(popupLayout, 800, 320, true);
+                    String errorText = null;
+                    try {
+                        errorText = new String(error.networkResponse.data, "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
                     }
-                });
-                popupWindow.showAtLocation(popupLayout, Gravity.CENTER, 0, 0);
-                popupWindow.getContentView().findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        popupWindow.dismiss();
+                    if (errorText != null && errorText.contains("Email")) {
+                        TextView textView = popupWindow.getContentView().findViewById(R.id.textView);
+                        textView.setText("این ایمیل قبلا ثبت شده است.\n لطفا از یک ایمیل دیگر جهت ثبت نام استفاده کنید");
                     }
-                });
+                    back_dim_layout.setVisibility(View.VISIBLE);
+                    popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                        @Override
+                        public void onDismiss() {
+                            back_dim_layout.setVisibility(View.GONE);
+                        }
+                    });
+                    popupWindow.showAtLocation(popupLayout, Gravity.CENTER, 0, 0);
+                    popupWindow.getContentView().findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popupWindow.dismiss();
+                        }
+                    });
+                } else {
+                    back_dim_layout = findViewById(R.id.back_dim_layout);
+                    LayoutInflater layoutInflater = (LayoutInflater) SignUpActivity.this.getSystemService(LAYOUT_INFLATER_SERVICE);
+                    popupLayout = layoutInflater.inflate(R.layout.popup_error, null);
+                    popupWindow = new PopupWindow(popupLayout, 800, 320, true);
+
+                    back_dim_layout.setVisibility(View.VISIBLE);
+                    popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                        @Override
+                        public void onDismiss() {
+                            back_dim_layout.setVisibility(View.GONE);
+                        }
+                    });
+                    popupWindow.showAtLocation(popupLayout, Gravity.CENTER, 0, 0);
+                    popupWindow.getContentView().findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popupWindow.dismiss();
+                        }
+                    });
+                }
             }
         }) {
             @Override
