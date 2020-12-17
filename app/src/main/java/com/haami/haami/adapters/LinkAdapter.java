@@ -18,7 +18,7 @@ import com.haami.haami.models.responses.ArticleResponse;
 import java.util.List;
 
 public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.ViewHolder> {
-    private List<ArticleResponse> links;
+    private final List<ArticleResponse> links;
 
     public LinkAdapter(List<ArticleResponse> links) {
         this.links = links;
@@ -29,6 +29,7 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.ViewHolder> {
         public final TextView title;
         public final TextView category;
         public final TextView address;
+        public final TextView description;
 
         public ViewHolder(View view) {
             super(view);
@@ -36,6 +37,7 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.ViewHolder> {
             title = view.findViewById(R.id.title_textview);
             category = view.findViewById(R.id.category_textview);
             address = view.findViewById(R.id.address_textview);
+            description = view.findViewById(R.id.description_textview);
         }
     }
 
@@ -53,6 +55,7 @@ public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.ViewHolder> {
         holder.title.setText(place.getTitle());
         holder.category.setText(place.getCategoryName());
         holder.address.setText(place.getBody());
+        holder.description.setText(place.getAddress());
     }
 
     @Override
