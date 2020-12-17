@@ -52,7 +52,7 @@
             android:text="@string/body_scan"
             android:textAlignment="gravity"
             android:textColor="@color/colorRelaxationTitleText"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <Button
             android:id="@+id/care_button"
@@ -67,7 +67,7 @@
             android:text="@string/care"
             android:textAlignment="gravity"
             android:textColor="@color/colorRelaxationTitleText"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <Button
             android:id="@+id/breathing_button"
@@ -82,7 +82,7 @@
             android:text="@string/breathing"
             android:textAlignment="gravity"
             android:textColor="@color/colorBackground"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
     </LinearLayout>
 
