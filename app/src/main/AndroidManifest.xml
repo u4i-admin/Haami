@@ -15,30 +15,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <receiver android:name=".utils.MyBroadcastReceiver"  android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.INPUT_METHOD_CHANGED" />
-            </intent-filter>
-        </receiver>
-
-        <service
-            android:name=".utils.MyFirebaseMessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/login_haami_icon" />
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAccent" />
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="@string/default_notification_channel_id" />
-
         <activity android:name="com.haami.haami.AboutActivity" />
         <activity android:name="com.haami.haami.SettingActivity" />
         <activity android:name="com.haami.haami.AgreementActivity" />

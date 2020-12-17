@@ -35,8 +35,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.Gson;
 import com.haami.haami.R;
 import com.haami.haami.app.AppController;
@@ -111,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
         boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
-        boolean isProUser = sharedPreferences.getBoolean("isProUser", false);
+        //boolean isProUser = sharedPreferences.getBoolean("isProUser", false);
         boolean isTutorialShowed = sharedPreferences.getBoolean("isTutorialShowed", false);
 
         if (!isTutorialShowed) {
@@ -122,28 +120,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     just_for_today_tutorial.setVisibility(View.VISIBLE);
                 }
             }, SHOW_TUTORIAL_DELAY_LENGTH);
-        }
-
-        if (isLoggedIn && isProUser) {
-            FirebaseInstanceId.getInstance().getInstanceId()
-                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                            if (!task.isSuccessful()) {
-                                Log.w(TAG, "getInstanceId failed", task.getException());
-                                return;
-                            }
-                            String token = task.getResult().getToken();
-                            String msg = getString(R.string.msg_token_fmt, token);
-                            Log.d(TAG, msg);
-                            //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-                            try {
-                                sendTokenToServer(token);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
         }
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
